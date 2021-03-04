@@ -2,3 +2,5 @@ winehq.key
 venv
 __pycache__
 .idea
+images
+scale_cache
