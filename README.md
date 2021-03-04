@@ -1,3 +1,8 @@
+A lot of work was done on this project before I finally decided it was too large
+in scope to continue living with my other miscellaneous small projects. For its
+git history prior to the first commit of this repo, see 
+[here](https://github.com/cstuartroe/misc/tree/master/Python/31EDO).
+
 ### Set up
 
 ```
