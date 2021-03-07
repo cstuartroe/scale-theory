@@ -1,9 +1,3 @@
-import math
-
-
-def cents(r):
-    return round(1200 * math.log2(r), 1)
-
 
 def degree_approximations(edo_steps):
     step_cents = [round(1200 * i / edo_steps) for i in range(edo_steps)]
@@ -31,43 +25,6 @@ def degree_approximations(edo_steps):
                 ))
 
     return approximations
-
-
-def lcm(*ints):
-    out = ints[0]
-    for n in ints[1:]:
-        out = int(out * n / math.gcd(out, n))
-    return out
-
-
-def prime_factors(n):
-    i = 2
-    factors = []
-    while i * i <= n:
-        if n % i:
-            i += 1
-        else:
-            n //= i
-            factors.append(i)
-    if n > 1:
-        factors.append(n)
-    return factors
-
-
-def euler_dissonance(*ints):
-    return sum((n-1) for n in prime_factors(lcm(*ints))) + 1
-
-
-def vogel_dissonance(*ints):
-    return sum((n-1) for n in prime_factors(lcm(*ints)) if n != 2) + 1
-
-
-def gill_purves_dissonance(n1, n2):
-    return round(100*(1-((n1+n2-1)/(n1*n2))))
-
-
-def compromise_dissonance(n1, n2):
-    return euler_dissonance(n1, n2) + gill_purves_dissonance(n1, n2)/10
 
 
 if __name__ == "__main__":

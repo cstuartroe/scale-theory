@@ -1,0 +1,30 @@
+import scales from "./scales.jxsd";
+
+scales_24edo: scales = [
+  {
+    name: "dioudeteric decatonic",
+    jumps: [3, 3, 2, 2, 2, 2, 3, 3, 2, 2],
+  },
+  {
+    name: "functional dioudeteric nonatonic",
+    jumps: [3, 3, 2, 2, 4, 3, 3, 2, 2],
+  },
+  {
+    name: "colorful dioudeteric nonatonic",
+    jumps: [3, 3, 4, 2, 2, 3, 3, 2, 2],
+  },
+  {
+    name: "neutral heptatonic",
+    jumps: [3, 3, 4, 4, 3, 3, 4],
+  },
+  {
+    name: "plain pentatonic",
+    jumps: [6, 4, 4, 6, 4],
+  },
+  {
+    name: "super pentatonic",
+    jumps: [5, 4, 5, 5, 5],
+  },
+]
+
+export default scales_24edo;

@@ -1,0 +1,494 @@
+import scales from "./scales.jxsd";
+
+scales_31edo: scales = [
+  {
+    name: "diatonic",
+    jumps: [5, 5, 3, 5, 5, 5, 3],
+  },
+  {
+    name: "12-TET approx",
+    jumps: [3, 2, 3, 2, 3, 3, 2, 3, 2, 3, 2, 3],
+  },
+  {
+    name: "neutral diatonic",
+    jumps: [4, 4, 5, 4, 4, 5, 5],
+  },
+  {
+    name: "neutral",
+    jumps: [4, 4, 5, 4, 5, 4, 5],
+  },
+  {
+    name: "hahn symmetric pentachordal",
+    jumps: [3, 3, 4, 3, 5, 3, 4, 3, 3],
+  },
+  {
+    name: "HSP heptatonic",
+    jumps: [3, 7, 3, 5, 3, 7, 3],
+  },
+  {
+    name: "hahn neutral",
+    jumps: [3, 3, 3, 4, 5, 3, 3, 3, 4],
+  },
+  {
+    name: "hahn nonatonic",
+    jumps: [4, 4, 2, 5, 3, 3, 4, 3, 3],
+  },
+  {
+    name: "strange decatonic",
+    jumps: [3, 2, 3, 2, 3, 4, 4, 2, 4, 4],
+  },
+  {
+    name: "god nonatonic",
+    jumps: [5, 5, 3, 2, 3, 5, 3, 2, 3],
+  },
+  {
+    name: "sub3 heptatonic",
+    jumps: [7, 3, 3, 5, 2, 8, 3],
+  },
+  {
+    name: "heptatonic B",
+    jumps: [5, 5, 3, 5, 5, 6, 2],
+  },
+  {
+    name: "heptatonic D",
+    jumps: [5, 5, 3, 3, 2, 5, 8],
+  },
+  {
+    name: "heptatonic E",
+    jumps: [4, 6, 3, 5, 5, 5, 3],
+  },
+  {
+    name: "heptatonic F",
+    jumps: [6, 4, 3, 5, 5, 5, 3],
+  },
+  {
+    name: "heptatonic G",
+    jumps: [6, 5, 4, 4, 5, 5, 2],
+  },
+  {
+    name: "heptatonic H",
+    jumps: [5, 5, 4, 4, 5, 2, 6],
+  },
+  {
+    name: "nonatonic I",
+    jumps: [3, 2, 5, 3, 5, 3, 2, 4, 4],
+  },
+  {
+    name: "dodecatonic A",
+    jumps: [3, 3, 3, 2, 2, 3, 3, 2, 3, 2, 3, 2],
+  },
+  {
+    name: "dodecatonic B",
+    jumps: [3, 3, 3, 2, 3, 2, 3, 2, 3, 3, 2, 2],
+  },
+  {
+    name: "dodecatonic C",
+    jumps: [3, 3, 3, 2, 2, 3, 3, 2, 3, 3, 2, 2],
+  },
+  {
+    name: "dodecatonic D",
+    jumps: [3, 2, 2, 4, 2, 3, 2, 3, 2, 2, 4, 2],
+  },
+  {
+    name: "dodecatonic E",
+    jumps: [4, 2, 2, 3, 2, 4, 2, 2, 3, 2, 3, 2],
+  },
+  {
+    name: "dodecatonic F",
+    jumps: [4, 2, 3, 2, 2, 3, 3, 3, 2, 3, 2, 2],
+  },
+  {
+    name: "dodecatonic G",
+    jumps: [4, 2, 2, 3, 2, 3, 3, 3, 2, 2, 3, 2],
+  },
+  {
+    name: "n7 sus pentatonic",
+    jumps: [5, 8, 5, 9, 4],
+  },
+  {
+    name: "h7 sus pentatonic",
+    jumps: [5, 8, 5, 7, 6],
+  },
+  {
+    name: "sus bayati pentatonic",
+    jumps: [5, 8, 5, 4, 9],
+  },
+  {
+    name: "n7 sus hexatonic",
+    jumps: [5, 8, 5, 5, 4, 4],
+  },
+  {
+    name: "n7 major hexatonic",
+    jumps: [5, 5, 8, 5, 4, 4],
+  },
+  {
+    name: "h7 sus hexatonic",
+    jumps: [5, 8, 5, 5, 2, 6],
+  },
+  {
+    name: "h7 major hexatonic",
+    jumps: [5, 5, 8, 5, 2, 6],
+  },
+  {
+    name: "n7 heptatonic",
+    jumps: [5, 5, 3, 5, 5, 4, 4],
+  },
+  {
+    name: "h7 heptatonic",
+    jumps: [5, 5, 2, 6, 5, 5, 3],
+  },
+  {
+    name: "double 3 heptatonic",
+    jumps: [5, 2, 3, 3, 5, 5, 8],
+  },
+  {
+    name: "double 7 sus heptatonic",
+    jumps: [5, 8, 5, 5, 2, 2, 4],
+  },
+  {
+    name: "double 7 major heptatonic",
+    jumps: [5, 5, 8, 5, 2, 2, 4],
+  },
+  {
+    name: "double 3 octatonic",
+    jumps: [5, 2, 3, 3, 5, 5, 4, 4],
+  },
+  {
+    name: "double 7 octatonic",
+    jumps: [5, 5, 3, 5, 5, 2, 2, 4],
+  },
+  {
+    name: "double 2, 6 nonatonic",
+    jumps: [2, 3, 5, 3, 5, 2, 3, 4, 4],
+  },
+  {
+    name: "double 3, 7 nonatonic",
+    jumps: [5, 2, 3, 3, 5, 5, 2, 2, 4],
+  },
+  {
+    name: "n7 chromatic",
+    jumps: [2, 3, 2, 3, 3, 2, 3, 2, 3, 2, 2, 4],
+  },
+  {
+    name: "3,7 dioudeteric dodecatonic",
+    jumps: [3, 2, 3, 2, 4, 2, 2, 3, 2, 2, 2, 4],
+  },
+  {
+    name: "3,7 dioudeteric decatonic",
+    jumps: [3, 2, 3, 2, 4, 4, 3, 2, 4, 4],
+  },
+  {
+    name: "3,7 functional dioudeteric nonatonic",
+    jumps: [5, 3, 2, 4, 4, 3, 2, 4, 4],
+  },
+  {
+    name: "3,7 colorful dioudeteric nonatonic",
+    jumps: [3, 2, 5, 4, 4, 3, 2, 4, 4],
+  },
+  {
+    name: "2,6 dioudeteric dodecatonic",
+    jumps: [2, 3, 2, 3, 4, 2, 2, 2, 3, 2, 2, 4],
+  },
+  {
+    name: "2,6 dioudeteric decatonic",
+    jumps: [2, 3, 2, 3, 4, 4, 2, 3, 4, 4],
+  },
+  {
+    name: "2,6 functional dioudeteric nonatonic",
+    jumps: [2, 3, 5, 4, 4, 2, 3, 4, 4],
+  },
+  {
+    name: "2,6 colorful dioudeteric nonatonic",
+    jumps: [5, 2, 3, 4, 4, 2, 3, 4, 4],
+  },
+  {
+    name: "2,6 dioudeteric modified dodecatonic",
+    jumps: [2, 3, 2, 3, 4, 1, 3, 2, 3, 2, 2, 4],
+  },
+  {
+    name: "double 6 sub2 n7 heptatonic",
+    jumps: [2, 8, 8, 2, 3, 4, 4],
+  },
+  {
+    name: "sub2 h7 heptatonic",
+    jumps: [2, 8, 5, 3, 5, 2, 6],
+  },
+  {
+    name: "double 3 tritone h7 heptatonic",
+    jumps: [2, 5, 3, 5, 8, 2, 6],
+  },
+  {
+    name: "double 2 aug4 sus h7 heptatonic",
+    jumps: [2, 3, 10, 3, 5, 2, 6],
+  },
+  {
+    name: "double 2 no 4 h7 heptatonic",
+    jumps: [2, 3, 5, 8, 5, 2, 6],
+  },
+  {
+    name: "aug4 h7 heptatonic",
+    jumps: [5, 5, 5, 3, 5, 2, 6],
+  },
+  {
+    name: "double 3 no 4 h7 heptatonic",
+    jumps: [5, 2, 3, 8, 5, 2, 6],
+  },
+  {
+    name: "aug4 subphrygian h7 heptatonic",
+    jumps: [2, 5, 8, 3, 2, 5, 6],
+  },
+  {
+    name: "up4 no 6 double 7 heptatonic",
+    jumps: [5, 2, 7, 4, 7, 2, 4],
+  },
+  {
+    name: "double 3 no 4 double 6 no 7 heptatonic",
+    jumps: [2, 5, 3, 8, 2, 3, 8],
+  },
+  {
+    name: "sub3 no 4 sub6 double 7 heptatonic",
+    jumps: [5, 2, 11, 2, 5, 2, 4],
+  },
+  {
+    name: "up4 double 7 sus heptatonic",
+    jumps: [7, 7, 4, 2, 5, 2, 4],
+  },
+  {
+    name: "sub3 up4 sub6 n7 heptatonic",
+    jumps: [5, 2, 7, 4, 2, 7, 4],
+  },
+  {
+    name: "plain pentatonic",
+    jumps: [8, 5, 5, 8, 5],
+  },
+  {
+    name: "3,7 super pentatonic",
+    jumps: [7, 5, 6, 7, 6],
+  },
+  {
+    name: "2,6 super pentatonic",
+    jumps: [6, 5, 7, 6, 7],
+  },
+  {
+    name: "nonatonic alpha",
+    jumps: [7, 2, 8, 1, 2, 2, 5, 3, 1],
+  },
+  {
+    name: "nonatonic beta",
+    jumps: [7, 2, 8, 1, 2, 5, 2, 3, 1],
+  },
+  {
+    name: "nonatonic gamma",
+    jumps: [8, 2, 7, 1, 3, 2, 5, 2, 1],
+  },
+  {
+    name: "nonatonic delta",
+    jumps: [8, 2, 7, 1, 3, 5, 2, 2, 1],
+  },
+  {
+    name: "chromatic alpha",
+    jumps: [2, 3, 5, 2, 3, 2, 1, 5, 2, 3, 2, 1],
+  },
+  {
+    name: "chromatic beta",
+    jumps: [3, 2, 3, 2, 5, 1, 2, 3, 2, 5, 1, 2],
+  },
+  {
+    name: "chromatic gamma",
+    jumps: [3, 2, 3, 2, 5, 1, 2, 3, 2, 3, 2, 3],
+  },
+  {
+    name: "chromatic delta",
+    jumps: [2, 3, 2, 3, 2, 6, 2, 3, 2, 3, 2, 1],
+  },
+  {
+    name: "chromatic epsilon",
+    jumps: [5, 2, 3, 2, 3, 3, 2, 3, 2, 3, 2, 1],
+  },
+  {
+    name: "chromatic zeta",
+    jumps: [2, 3, 2, 3, 2, 3, 3, 5, 2, 3, 2, 1],
+  },
+  {
+    name: "chromatic eta",
+    jumps: [5, 2, 3, 5, 2, 1, 2, 3, 2, 3, 2, 1],
+  },
+  {
+    name: "chromatic iota",
+    jumps: [2, 3, 2, 3, 5, 2, 1, 5, 2, 3, 2, 1],
+  },
+  {
+    name: "chromatic kappa",
+    jumps: [5, 2, 3, 3, 2, 2, 1, 2, 3, 5, 2, 1],
+  },
+  {
+    name: "chromatic lambda",
+    jumps: [5, 2, 3, 3, 2, 3, 2, 3, 2, 3, 2, 1],
+  },
+  {
+    name: "chromatic mu",
+    jumps: [3, 2, 3, 2, 1, 5, 2, 3, 2, 5, 1, 2],
+  },
+  {
+    name: "chromatic nu",
+    jumps: [5, 2, 3, 2, 3, 2, 1, 5, 2, 3, 2, 1],
+  },
+  {
+    name: "chromatic xi",
+    jumps: [5, 2, 1, 7, 1, 2, 3, 4, 1, 2, 1, 2],
+  },
+  {
+    name: "chromatic omicron",
+    jumps: [3, 5, 2, 1, 2, 5, 2, 1, 3, 4, 1, 2],
+  },
+  {
+    name: "chromatic pi",
+    jumps: [4, 1, 2, 3, 2, 3, 2, 1, 5, 2, 3, 3],
+  },
+  {
+    name: "chromatic rho",
+    jumps: [4, 1, 2, 3, 5, 2, 1, 5, 2, 3, 2, 1],
+  },
+  {
+    name: "chromatic theta",
+    jumps: [2, 3, 2, 3, 3, 5, 2, 3, 3, 2, 2, 1],
+  },
+  {
+    name: "heptatonic theta 1",
+    jumps: [5, 5, 3, 5, 5, 7, 1],
+  },
+  {
+    name: "heptatonic theta 2",
+    jumps: [5, 5, 2, 1, 5, 5, 8],
+  },
+  {
+    name: "god chromatic A",
+    jumps: [2, 3, 4, 1, 3, 2, 3, 2, 3, 3, 1, 4],
+  },
+  {
+    name: "god chromatic B",
+    jumps: [3, 2, 4, 1, 3, 3, 2, 3, 2, 3, 1, 4],
+  },
+  {
+    name: "double 2 dim5 sus heptatonic",
+    jumps: [3, 2, 8, 3, 7, 3, 5],
+  },
+  {
+    name: "double 2 no 5  major heptatonic",
+    jumps: [3, 2, 5, 3, 8, 2, 8],
+  },
+  {
+    name: "proper nonatonic A",
+    jumps: [4, 1, 5, 3, 5, 2, 3, 5, 3],
+  },
+  {
+    name: "proper nonatonic B",
+    jumps: [5, 1, 4, 3, 5, 3, 2, 5, 3],
+  },
+  {
+    name: "strictly proper nonatonic A",
+    jumps: [3, 3, 3, 4, 3, 3, 5, 2, 5],
+  },
+  {
+    name: "strictly proper nonatonic B",
+    jumps: [5, 2, 5, 3, 3, 4, 3, 3, 3],
+  },
+  {
+    name: "melodic god B heptatonic",
+    jumps: [5, 8, 3, 2, 4, 1, 8],
+  },
+  {
+    name: "ultra melodic heptatonic",
+    jumps: [5, 5, 6, 2, 1, 4, 8],
+  },
+  {
+    name: "melodic octatonic 27 A",
+    jumps: [6, 4, 1, 5, 8, 4, 1, 2],
+  },
+  {
+    name: "melodic octatonic 27 B",
+    jumps: [6, 4, 1, 5, 3, 5, 5, 2],
+  },
+  {
+    name: "melodic dodecatonic 27",
+    jumps: [5, 1, 4, 1, 5, 2, 1, 4, 1, 4, 1, 2],
+  },
+  {
+    name: "melodic octatonic 31 A",
+    jumps: [3, 2, 7, 1, 3, 2, 8, 5],
+  },
+  {
+    name: "melodic octatonic 31 B",
+    jumps: [3, 5, 5, 3, 5, 2, 3, 5],
+  },
+  {
+    name: "ultra melodic nonatonic",
+    jumps: [5, 3, 4, 1, 5, 3, 2, 3, 5],
+  },
+  {
+    name: "melodic dodecatonic 31",
+    jumps: [3, 2, 3, 4, 1, 3, 2, 3, 2, 2, 1, 5],
+  },
+  {
+    name: "no-step melodic nonatonic",
+    jumps: [5, 3, 5, 2, 3, 4, 4, 3, 2],
+  },
+  {
+    name: "no-step melodic dodecatonic",
+    jumps: [3, 3, 2, 3, 2, 4, 2, 2, 3, 2, 3, 2],
+  },
+  {
+    name: "harmonic 7 near-diatonic",
+    jumps: [6, 6, 2, 5, 5, 5, 2],
+  },
+  {
+    name: "septimal playground diatonic",
+    jumps: [5, 5, 2, 6, 5, 5, 3],
+  },
+  {
+    name: "septimal playground octatonic 1",
+    jumps: [5, 5, 2, 3, 3, 5, 5, 3],
+  },
+  {
+    name: "septimal playground octatonic 2",
+    jumps: [5, 3, 2, 2, 6, 5, 5, 3],
+  },
+  {
+    name: "septimal playground nonatonic 1",
+    jumps: [5, 3, 2, 2, 3, 3, 5, 5, 3],
+  },
+  {
+    name: "septimal playground nonatonic 2",
+    jumps: [5, 3, 2, 2, 6, 3, 2, 5, 3],
+  },
+  {
+    name: "septimal playground decatonic",
+    jumps: [5, 3, 2, 2, 3, 3, 3, 2, 5, 3],
+  },
+  {
+    name: "septimal playground chromatic",
+    jumps: [3, 2, 3, 2, 2, 3, 3, 3, 2, 3, 2, 3],
+  },
+  {
+    name: "consonant heptatonic",
+    jumps: [5, 3, 5, 5, 5, 6, 2],
+  },
+  {
+    name: "consonant hexatonic",
+    jumps: [5, 8, 5, 5, 6, 2],
+  },
+  {
+    name: "fairly consonant many-chorded octatonic",
+    jumps: [7, 3, 3, 5, 2, 3, 5, 3],
+  },
+  {
+    name: "consonant octatonic A",
+    jumps: [5, 5, 3, 5, 2, 6, 2, 3],
+  },
+  {
+    name: "consonant octatonic B",
+    jumps: [5, 2, 3, 3, 5, 5, 5, 3],
+  },
+]
+
+export default scales_31edo;

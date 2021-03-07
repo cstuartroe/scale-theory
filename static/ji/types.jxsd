@@ -1,0 +1,10 @@
+interval_array = [{
+  name: String,
+  num: Integer,
+  denom: Integer,
+}]
+
+chord_array = [{
+  name: String,
+  ratio: [Integer],
+}]

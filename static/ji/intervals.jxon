@@ -1,0 +1,121 @@
+import { interval_array } from "./types.jxsd";
+
+intervals: interval_array = [
+  {
+    name: "oct",
+    num: 2,
+    denom: 1,
+  },
+  {
+    name: "p5",
+    num: 3,
+    denom: 2,
+  },
+  {
+    name: "p4",
+    num: 4,
+    denom: 3,
+  },
+  {
+    name: "maj6",
+    num: 5,
+    denom: 3,
+  },
+  {
+    name: "maj3",
+    num: 5,
+    denom: 4,
+  },
+  {
+    name: "m3",
+    num: 6,
+    denom: 5,
+  },
+  {
+    name: "m6",
+    num: 8,
+    denom: 5,
+  },
+  {
+    name: "maj2",
+    num: 9,
+    denom: 8,
+  },
+  {
+    name: "h7",
+    num: 7,
+    denom: 4,
+  },
+  {
+    name: "large m7",
+    num: 9,
+    denom: 5,
+  },
+  {
+    name: "m7",
+    num: 16,
+    denom: 9,
+  },
+  {
+    name: "septimal m3",
+    num: 7,
+    denom: 6,
+  },
+  {
+    name: "septimal m2",
+    num: 8,
+    denom: 7,
+  },
+  {
+    name: "maj7",
+    num: 15,
+    denom: 8,
+  },
+  {
+    name: "small maj2",
+    num: 10,
+    denom: 9,
+  },
+  {
+    name: "small septimal tritone",
+    num: 7,
+    denom: 5,
+  },
+  {
+    name: "septimal maj3",
+    num: 9,
+    denom: 7,
+  },
+  {
+    name: "septimal maj6",
+    num: 12,
+    denom: 7,
+  },
+  {
+    name: "m2",
+    num: 16,
+    denom: 15,
+  },
+  {
+    name: "pythagorean maj6",
+    num: 27,
+    denom: 16,
+  },
+  {
+    name: "large septimal tritone",
+    num: 10,
+    denom: 7,
+  },
+  {
+    name: "septimal m6",
+    num: 14,
+    denom: 9,
+  },
+  {
+    name: "pythagorean m3",
+    num: 32,
+    denom: 27,
+  },
+]
+
+export default intervals;

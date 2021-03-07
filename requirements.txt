@@ -1,3 +1,5 @@
+jxon==1.0.5
+memoization==0.3.2
 microcsound==2017.1127
 Pillow==8.1.0
 tabulate==0.8.7

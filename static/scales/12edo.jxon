@@ -1,0 +1,10 @@
+import scales from "./scales.jxsd";
+
+scales_12edo: scales = [
+  {
+    name: "diatonic",
+    jumps: [2, 2, 1, 2, 2, 2, 1],
+  }
+]
+
+export default scales_12edo;

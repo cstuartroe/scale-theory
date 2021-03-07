@@ -2,44 +2,6 @@ from scales import SCALE_REFS, DEGREE_REFS, DEGREES_31EDO, TETRACHORDS_31EDO
 from find_scales import interval_diversity, count_interval, count18s, count_chord_richness, count_total_chords, proper, consonances, count_dissonances, count_extensions
 from midi_numbers import get_12_edo_name
 
-def print_scales(scale_name, edo):
-    scale = SCALE_REFS[edo][scale_name]
-
-    for i in range(len(scale)):
-        steps = 0
-        print("unison ", end="")
-        for j in range(len(scale)):
-            add = scale[(i + j) % len(scale)]
-            steps += add
-            print((f"+{add} " + str(DEGREE_REFS[edo][steps])).ljust(14, ' '), end="")
-        assert (steps == edo)
-        print()
-
-
-def print_cents(scale_name, edo):
-    scale = SCALE_REFS[edo][scale_name]
-    steps = 0
-    for jump in scale:
-        steps += jump
-        print(round(1200 * steps / edo))
-
-
-BASE_31EDO_MIDI_NOTE = 40
-
-
-def get_midi_numbers(scale_name, edo):
-    scale = SCALE_REFS[edo][scale_name]
-    out = [BASE_31EDO_MIDI_NOTE - edo]
-    for _ in range(3):
-        for interval in scale:
-            out.append(out[-1] + interval)
-    return out
-
-
-# for subl in ([2, 3, 4, 4], [3, 2, 4, 4], [4, 4, 2, 3], [4, 4, 3, 2]):
-#    l = [5] + subl + subl
-#    print(l)
-#    print_scales(l)
 
 
 def scale_info(scale_name, extra_lines=None):
