@@ -1,30 +1,59 @@
-from scales import SCALE_REFS, DEGREE_REFS, DEGREES_31EDO, TETRACHORDS_31EDO
-from find_scales import interval_diversity, count_interval, count18s, count_chord_richness, count_total_chords, proper, consonances, count_dissonances, count_extensions
-from midi_numbers import get_12_edo_name
+from src.scales import Cycle
+from src.scale_properties.cycle_stats import (
+    count_present_consonances,
+    count_dissonances,
+    interval_diversity,
+    count_total_chords,
+    count_extensions,
+    proper,
+)
+# from src.midi_utils import midi_to_12edo_name, get_midi_numbers
+from .utils import make_parser
+
+TETRACHORDS = {
+    "maj7": ["maj3", "p5", "maj7"],
+    "m7": ["m3", "p5", "m7"],
+    "dom7": ["maj3", "p5", "m7"],
+    "h7": ["maj3", "p5", "h7"],
+    "subminadd4": ["septimal m3", "p4", "p5"],
+    "submimaj7": ["septimal m3", "p5", "maj7"],
+    "minmaj7": ["m7", "p5", "maj7"],
+}
 
 
+def scale_info(cycle: Cycle):
+    print(cycle.name())
 
-def scale_info(scale_name, extra_lines=None):
-    print(scale_name)
-    print_scales(scale_name, 31)
-    print_cents(scale_name, 31)
-    scale = SCALE_REFS[31][scale_name]
-    print(f"Consonant interval diversity: {interval_diversity(scale, consonances)}/{len(consonances)}")
-    print("Total dissonances:", count_dissonances(scale, consonances))
-    print("Total interval diversity: %d/31" % interval_diversity(scale))
-    print(*[(DEGREES_31EDO[i], count_interval(scale, i)) for i in range(32)])
-    print("Total chords:", *[count_total_chords(scale, [third]) for third in [7, 8, 9, 10, 11]])
+    for mode in cycle.modes:
+        print("unison    ", end="")
+        for jump, ivl in zip(mode.jumps, mode.intervals()):
+            print(f"-{jump}->  ", ivl.name().ljust(10), end="")
+
+        print(f"-{mode.jumps[-1]}->  ", "p8")
+
+    for ivl in cycle.canon_mode.intervals():
+        print(ivl.cents())
+
+    print(f"Consonant interval diversity: {count_present_consonances(cycle, cycle.edo().consonances)}/{len(cycle.edo().consonances)}")
+    print("Total dissonances:", count_dissonances(cycle, cycle.edo().dissonances))
+    print(f"Total interval diversity: {interval_diversity(cycle)}/{cycle.edo().steps - 1}")
+    print(dict([(ivl.name(), count) for ivl, count in cycle.interval_counts().items()]))
+    print("Total chords:", *[count_total_chords(cycle, [third])[third] for third in ["septimal m3", "m3", "n3", "maj3", "septimal maj3"]])
     print("Total tetrachords:")
-    for name, degrees in TETRACHORDS_31EDO.items():
-        if count_extensions(scale, degrees) > 0:
-            print(f"  {name}: {count_extensions(scale, degrees)}")
-    print("Proper:", proper(scale))
-    print("MIDI notes:", ", ".join(map(get_12_edo_name, get_midi_numbers(scale_name, 31))))
-    for line in extra_lines or []:
-        print(line)
+    for name, degrees in TETRACHORDS.items():
+        if count_extensions(cycle, degrees) > 0:
+            print(f"  {name}: {count_extensions(cycle, degrees)}")
+    print("Proper:", proper(cycle))
+    # print("MIDI notes:", ", ".join(map(midi_to_12edo_name, get_midi_numbers(cycle))))
     print()
 
 
-if __name__ == "__main__":
-    for scale in ("septimal playground octatonic 1", "fairly consonant many-chorded octatonic", "consonant octatonic A", "consonant octatonic B",):
-        scale_info(scale)
+class ScaleInfo:
+    parser = make_parser(
+        description="Print info about a single cycle",
+        cycle=True
+    )
+
+    @staticmethod
+    def run(edo_steps, cycle):
+        scale_info(cycle)

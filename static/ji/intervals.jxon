@@ -62,7 +62,7 @@ intervals: interval_array = [
     denom: 6,
   },
   {
-    name: "septimal m2",
+    name: "septimal maj2",
     num: 8,
     denom: 7,
   },
@@ -116,6 +116,11 @@ intervals: interval_array = [
     num: 32,
     denom: 27,
   },
+  {
+    name: "n3",
+    num: 11,
+    denom: 9,
+  }
 ]
 
 export default intervals;

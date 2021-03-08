@@ -14,6 +14,12 @@ class Interval:
     def cents(self):
         return round(self.octaves() * 1200, 1)
 
+    def __gt__(self, other):
+        return self.cents() > other.cents()
+        
+    def __lt__(self, other):
+        return self.cents() < other.cents()
+
 
 class JI(Interval):
     def __init__(self, num, denom):

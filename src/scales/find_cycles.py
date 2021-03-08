@@ -1,6 +1,8 @@
 from .scales import Cycle
+from functools import cache
 
 
+@cache
 def find_mode_tuples(scale_size, edo_steps):
     if scale_size == 1:
         return [(edo_steps,)]
@@ -15,7 +17,9 @@ def find_mode_tuples(scale_size, edo_steps):
 
 # This method is naive in that it uses find_mode_tuples, which will output all possible modes
 # This is less efficient than algorithms that avoid generating multiple modes of the same cycle
+@cache
 def find_cycles_naive(scale_size, edo_steps):
+    print(f"Computing all cycles of size {scale_size} in {edo_steps}EDO...")
     assert scale_size <= edo_steps
     out = set()
     for mode_tuple in find_mode_tuples(scale_size, edo_steps):
@@ -23,29 +27,5 @@ def find_cycles_naive(scale_size, edo_steps):
     return out
 
 
-MODE_TUPLE_CACHE = {}
-
-
-def find_mode_tuples_cached(scale_size, edo_steps):
-    if (scale_size, edo_steps) in MODE_TUPLE_CACHE:
-        return MODE_TUPLE_CACHE[(scale_size, edo_steps)]
-
-    out = []
-
-    if scale_size == 1:
-        out = [(edo_steps,)]
-
-    for jump in range(1, edo_steps - scale_size + 2):
-        for mode_tuple in find_mode_tuples(scale_size - 1, edo_steps - jump):
-            out.append((jump, *mode_tuple))
-
-    MODE_TUPLE_CACHE[(scale_size, edo_steps)] = out
-    return out
-
-
-def find_cycles_cached(scale_size, edo_steps):
-    assert scale_size <= edo_steps
-    out = set()
-    for mode_tuple in find_mode_tuples_cached(scale_size, edo_steps):
-        out.add(Cycle(mode_tuple))
-    return out
+# this is just set to whatever should be the default method
+all_cycles = find_cycles_naive

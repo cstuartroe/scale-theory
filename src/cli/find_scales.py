@@ -1,33 +1,31 @@
-
-def find_subscales(scale, priorities_function, length):
-    subscales = []
-    for subscale in all_subscales(scale, length):
-        subscales.append((subscale, *priorities_function(subscale)))
-
-    subscales.sort(key=lambda x: x[1:])
-    print(len(subscales))
-    for subscale_stats in subscales:
-        this_scale_names = []
-        for scale_name, named_scale in SCALES_31EDO.items():
-            if tuple(find_canon_rotation(named_scale)) == subscale_stats[0]:
-                this_scale_names.append(scale_name)
-        print(*subscale_stats, *this_scale_names)
+from typing import List
+from src.scales import Cycle, all_cycles
+from .utils import make_parser
 
 
+def list_best_cycles_from(cycles: List[Cycle], priorities):
+    cycle_stats = []
+    for cycle in cycles:
+        cycle_stats.append((cycle, tuple(p(cycle) for p in priorities)))
 
-def print_family(parent_scale_name, lengths=(6, 7, 8, 9, 10,)):
-    parent_scale = SCALES_31EDO[parent_scale_name]
-    subscales = {}
-    for length in lengths:
-        subscales[length] = all_subscales(parent_scale, length)
+    cycle_stats.sort(key=lambda x: x[1])
+    for cycle, stats in cycle_stats[-100:]:
+        named_parents = [p for p in cycle.parents() if p.name() is not None]
+        print(cycle, *stats, cycle.name() or "", *named_parents)
+    print(len(cycles), "cycles found.")
 
-    named_subscales = []
-    for name, scale in SCALES_31EDO.items():
-        if find_canon_rotation(tuple(scale)) in subscales.get(len(scale), []):
-            named_subscales.append((name, scale))
-    named_subscales.sort(key=lambda x: len(x[1]))
 
-    for name, scale in named_subscales:
-        scale_info(name, [f"Keys: {' '.join(list(find_keys(scale, parent_scale)))}"])
+def list_best_cycles(scale_size, edo_steps, priorities):
+    list_best_cycles_from(all_cycles(scale_size, edo_steps), priorities)
 
-    scale_info(parent_scale_name)
+
+class ListCycles:
+    parser = make_parser(
+        description="List the best cycles according to a set of criteria",
+        scale_size=True,
+        priorities=True,
+    )
+
+    @staticmethod
+    def run(edo_steps, scale_size, priorities):
+        list_best_cycles(scale_size, edo_steps, priorities)

@@ -1,25 +1,31 @@
-import argparse
 from timer import Timer
-from src.scales import find_cycles_naive, find_cycles_cached
+from src.scales.find_cycles import find_cycles_naive
+from .utils import make_parser
 
-parser = argparse.ArgumentParser(description='Measure the runtime of various methods for finding scales.')
-parser.add_argument('scale_size', type=int, nargs='?', default=7,
-                    help='number of notes in the scale')
-parser.add_argument('edo_steps', type=int, nargs='?', default=12,
-                    help='number of divisions of octave')
+METHODS = [find_cycles_naive]
 
 
 class TimeScaleFinding:
-    parser = parser
+    parser = make_parser(
+        description='Measure the runtime of various methods for finding scales.',
+        scale_size=True,
+    )
 
     @staticmethod
     def run(scale_size, edo_steps):
         t = Timer()
-        t.task("find_scales_naive")
-        naive_scales = find_cycles_naive(scale_size, edo_steps)
-        t.task("find_cycles_cached")
-        cached_scales = find_cycles_cached(scale_size, edo_steps)
-        t.clear()
-        assert cached_scales == naive_scales
-        print(len(naive_scales), "scales found.")
+
+        computed_cycles = []
+        for method in METHODS:
+            method.cache_clear()
+            t.task(method.__name__)
+            computed_cycles.append(method(scale_size, edo_steps))
+            t.clear()
+
+        for c in computed_cycles[1:]:
+            # we want to make sure the algorithms produce the same end result
+            assert c == computed_cycles[0]
+
+        print(len(computed_cycles[0]), "scales found.")
+
         t.log()
