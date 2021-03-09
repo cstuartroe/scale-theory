@@ -16,5 +16,5 @@ class ListSubcycles:
     )
 
     @staticmethod
-    def run(edo_steps, cycle, priorities, scale_size):
+    def run(cycle, priorities, scale_size):
         list_best_subcycles(cycle, priorities, scale_size)

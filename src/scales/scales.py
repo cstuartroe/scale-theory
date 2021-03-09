@@ -73,7 +73,7 @@ class Cycle(Scale, metaclass=CycleMetaclass):
 
     @cache
     def name(self):
-        for cycle in NAMED_CYCLES[self.edo().steps]:
+        for cycle in NAMED_CYCLES.get(self.edo().steps, []):
             if Cycle(cycle["jumps"]) == self:
                 return cycle["name"]
 

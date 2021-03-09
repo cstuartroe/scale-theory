@@ -73,6 +73,10 @@ class EDO:
     def __eq__(self, other):
         return self.steps == other.steps
 
+    @cache
+    def degrees(self):
+        return [EDOInterval(i, self.steps) for i in range(1, self.steps)]
+
     def approximate(self, ivl: Interval):
         return EDOInterval(round(ivl.octaves() * self.steps), self.steps)
 

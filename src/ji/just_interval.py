@@ -22,10 +22,11 @@ class Interval:
 
 
 class JI(Interval):
-    def __init__(self, num, denom):
-        assert num > denom
+    def __init__(self, denom, num):
+        assert num >= denom
         self.num = num
         self.denom = denom
+        self.ratio = (denom, num)
 
     def octaves(self):
         return math.log2(self.num / self.denom)
@@ -38,23 +39,11 @@ class JI(Interval):
             if (ivl["num"], ivl["denom"]) == (self.num, self.denom):
                 return ivl["name"]
 
-    def euler_dissonance(self):
-        return euler_dissonance(self.denom, self.num)
-
-    def vogel_dissonance(self):
-        return vogel_dissonance(self.denom, self.num)
-
-    def gill_purves_dissonance(self):
-        return gill_purves_dissonance(self.denom, self.num)
-
-    def compromise_dissonance(self):
-        return self.euler_dissonance() + self.gill_purves_dissonance() / 10
-
     @classmethod
     def by_name(cls, name: str):
         for ivl in NAMED_INTERVALS:
             if ivl["name"] == name:
-                return cls(ivl["num"], ivl["denom"])
+                return cls(num=ivl["num"], denom=ivl["denom"])
 
 
-JI.NAMED_INTERVALS = [JI(ivl["num"], ivl["denom"]) for ivl in NAMED_INTERVALS]
+JI.NAMED_INTERVALS = [JI(num=ivl["num"], denom=ivl["denom"]) for ivl in NAMED_INTERVALS]

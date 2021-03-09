@@ -44,6 +44,7 @@ def scale_info(cycle: Cycle):
         if count_extensions(cycle, degrees) > 0:
             print(f"  {name}: {count_extensions(cycle, degrees)}")
     print("Proper:", proper(cycle))
+    # TODO
     # print("MIDI notes:", ", ".join(map(midi_to_12edo_name, get_midi_numbers(cycle))))
     print()
 
@@ -51,9 +52,9 @@ def scale_info(cycle: Cycle):
 class ScaleInfo:
     parser = make_parser(
         description="Print info about a single cycle",
-        cycle=True
+        cycle=True,
     )
 
     @staticmethod
-    def run(edo_steps, cycle):
+    def run(cycle):
         scale_info(cycle)

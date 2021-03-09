@@ -1,68 +1,48 @@
-import math
 from tabulate import tabulate
-
-CHORD_MAX = 100
-
-
-def chords_helper(tones, start=2):
-    if tones == 0:
-        return [()]
-    else:
-        out = []
-        for tonic in range(start, CHORD_MAX + 1):
-            for tail in chords_helper(tones - 1, tonic + 1):
-                out.append((tonic, *tail))
-        return out
+from src.edo import EDO
+from src.ji import just_chords
+from .utils import make_parser
 
 
-def chords(tones=3):
-    return [chord for chord in chords_helper(tones) if math.gcd(*chord) == 1 and (chord[-1] / chord[0] < 2)]
+MAJOR_EDOS = [12, 17, 19, 22, 24, 31]
 
 
-def chords_with_dissonance(tones=3, dissonance_function=euler_dissonance):
-    out = []
-
-    for chord in chords(tones):
-        out.append((chord, dissonance_function(*chord)))
-
-    out.sort(key=lambda x: x[1])
-    return out
+parser = make_parser(description="List just chords in order of consonance", edo_steps=True, dissonance_function=True,
+                     max_ratio=True)
+parser.add_argument("-t", "--tones", nargs='?', type=int, metavar='n', default=3,
+                    help="The number of tones in the chord")
 
 
-def closest_approximation(r, edo_steps):
-    r_cents = cents(r)
-    step_size = 1200 / edo_steps
-    steps = round(r_cents / step_size)
-    return round((steps * step_size) - r_cents, 1)
+class FindJustChords:
+    parser = parser
 
-
-MAJOR_EDOS = [12, 17, 19, 22, 24, 31, 41]
-
-
-if __name__ == "__main__":
-    table = [
-        (
-            "Ratio",
-            "Dissonance",
-            "Name",
-            "Cents",
-            *(
-                f"{s}EDO Approximation"
-                for s in MAJOR_EDOS
+    @staticmethod
+    def run(tones, max_ratio, dissonance_function):
+        table = [
+            (
+                "Ratio",
+                "Dissonance",
+                "Name",
+                "Cents",
+                *(
+                    f"{s}EDO Approximation"
+                    for s in MAJOR_EDOS
+                )
             )
-        )
-    ]
+        ]
 
-    for chord, dissonance in chords_with_dissonance(2, dissonance_function=euler_dissonance):
-        table.append((
-            ':'.join(map(str, chord)),
-            dissonance,
-            NAMED_CHORDS.get(chord, ''),
-            cents(chord[1]/chord[0]),
-            *(
-                closest_approximation(chord[1]/chord[0], edo_steps)
-                for edo_steps in MAJOR_EDOS
-            ),
-        ))
+        chords = list(just_chords(tones, max_ratio))
 
-    print(tabulate(table))
+        for chord in sorted(chords, key=lambda c: dissonance_function(c), reverse=True):
+            table.append((
+                ":".join(map(str, chord.ratio)),
+                dissonance_function(chord),
+                chord.name_with_inversion(),
+                ", ".join(map(str, chord.cents())),
+                *(
+                    ",".join([str(ivl.steps) for ivl in chord.approximation_in(EDO(edo_steps))])
+                    for edo_steps in MAJOR_EDOS
+                ),
+            ))
+
+        print(tabulate(table))

@@ -6,24 +6,28 @@ chords: chord_array = [
     ratio: [6, 8, 9],
   },
   {
-    name: "sus2",
-    ratio: [8, 9, 12],
-  },
-  {
     name: "major",
-    ratio: [3, 4, 5],
-  },
-  {
-    name: "suspended (quartal)",
-    ratio: [9, 12, 16],
+    ratio: [4, 5, 6],
   },
   {
     name: "minor",
     ratio: [10, 12, 15],
   },
   {
+    name: "m7",
+    ratio: [10, 12, 15, 18],
+  },
+  {
     name: "m7 w/out 5",
     ratio: [5, 6, 9],
+  },
+  {
+    name: "m7 w/out 3",
+    ratio: [10, 15, 18],
+  },
+  {
+    name: "maj7",
+    ratio: [8, 10, 12, 15],
   },
   {
     name: "maj7 w/out 5",
@@ -38,24 +42,20 @@ chords: chord_array = [
     ratio: [4, 6, 7],
   },
   {
-    name: "E C D",
-    ratio: [5, 8, 9],
-  },
-  {
-    name: "C D B",
-    ratio: [8, 9, 15],
-  },
-  {
-    name: "m7 w/out 3",
-    ratio: [9, 10, 15],
-  },
-  {
-    name: "septimal dom7 w/out 5",
+    name: "h7 w/out 5",
     ratio: [4, 5, 7],
   },
   {
     name: "septimal minor",
     ratio: [6, 7, 9],
+  },
+  {
+    name: "C D E",
+    ratio: [8, 9, 10],
+  },
+  {
+    name: "B C D",
+    ratio: [15, 16, 18],
   },
   {
     name: "septimal Bb C D",
@@ -66,16 +66,8 @@ chords: chord_array = [
     ratio: [5, 6, 7],
   },
   {
-    name: "maj7",
-    ratio: [8, 10, 12, 15],
-  },
-  {
     name: "m6",
     ratio: [10, 12, 15, 16],
-  },
-  {
-    name: "m7",
-    ratio: [10, 12, 15, 18],
   },
   {
     name: "sus2 add6",

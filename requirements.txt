@@ -1,7 +1,6 @@
 attrs==20.3.0
 cmd2==1.5.0
 colorama==0.4.4
-gnureadline==8.0.0
 jxon==1.0.5
 memoization==0.3.2
 microcsound==2017.1127

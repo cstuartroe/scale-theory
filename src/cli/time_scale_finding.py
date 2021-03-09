@@ -11,6 +11,8 @@ class TimeScaleFinding:
         scale_size=True,
     )
 
+    pass_edo_steps = True
+
     @staticmethod
     def run(scale_size, edo_steps):
         t = Timer()

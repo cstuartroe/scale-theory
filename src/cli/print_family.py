@@ -21,5 +21,5 @@ class PrintFamily:
     )
 
     @staticmethod
-    def run(edo_steps, cycle):
+    def run(cycle):
         print_family(cycle, lengths=[6, 7, 8, 9])

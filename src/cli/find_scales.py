@@ -26,6 +26,8 @@ class ListCycles:
         priorities=True,
     )
 
+    pass_edo_steps = True
+
     @staticmethod
     def run(edo_steps, scale_size, priorities):
         list_best_cycles(scale_size, edo_steps, priorities)
