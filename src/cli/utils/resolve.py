@@ -14,7 +14,7 @@ def resolve_cycle_name(edo_steps, cycle_name):
         return cycle
     else:
         try:
-            jumps = [int(j) for j in cycle_name.split(",")]
+            jumps = [int(j) for j in cycle_name.replace(" ", "").split(",")]
         except ValueError:
             raise ScaleTheoryError(f"Not a known scale name or valid comma-separated list of integers: {cycle_name}")
 
@@ -27,11 +27,14 @@ def resolve_priorities(priorities_string):
     if priorities_string in PRIORITY_SEQUENCES:
         return PRIORITY_SEQUENCES[priorities_string]
 
-    priorities_strings = regex.fullmatch(r"(([\w\d]+\([\w\d ,]*\)),?)+", priorities_string).captures(2)
+    match_obj = regex.fullmatch(r"(([\w\d]+(\([\w\d ,]*\))?),?\s*)+", priorities_string)
+    if match_obj is None:
+        raise ScaleTheoryError("Invalid priorities string")
+    priorities_strings = match_obj.captures(2)
     priorities = []
 
     for priorities_string in priorities_strings:
-        m = regex.fullmatch(r"([\w\d]+)\((([\w\d ]+),?)*\)", priorities_string)
+        m = regex.fullmatch(r"([\w\d]+)(\((([\w\d ]+),?)*\))?", priorities_string)
         method_name = m.groups()[0]
         args = m.captures(3)
         method = CYCLE_STATS[method_name]
