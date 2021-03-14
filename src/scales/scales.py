@@ -132,12 +132,15 @@ class Cycle(Scale, metaclass=CycleMetaclass):
         )
 
 
+PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71]
+
+
 class Mode(Scale):
     @cache
     def weight(self):
-        total = 0
-        for j in range(len(self.jumps)):
-            total += j * self.jumps[j]
+        total = 1
+        for i, jump in enumerate(self.jumps):
+            total *= PRIMES[i] ** jump
         return total
 
     @cache
