@@ -8,6 +8,7 @@ from src.cli import (
     ListSubcycles,
     FindJustChords,
     DegreeApproximations,
+    PlayMidi,
 )
 from src.cli.utils import resolve, ScaleTheoryError
 
@@ -19,6 +20,7 @@ COMMANDS = {
     "find_subscales": ListSubcycles,
     "just_chords": FindJustChords,
     "degree_approximation": DegreeApproximations,
+    "play": PlayMidi,
 }
 
 

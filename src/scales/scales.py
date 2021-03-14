@@ -4,6 +4,7 @@ from typing import List
 import jxon
 from functools import cache
 from src.edo import EDO, EDOInterval
+from src.midi_utils import emit_midi_sequence, BASE_MIDI_NOTE
 
 
 class Scale:
@@ -122,6 +123,14 @@ class Cycle(Scale, metaclass=CycleMetaclass):
     def named_cycles(edo_steps: int):
         return [Cycle(cycle["jumps"]) for cycle in NAMED_CYCLES.get(edo_steps, [])]
 
+    def play_midi(self, note_duration, velocity, channel):
+        emit_midi_sequence(
+            jumps=self.jumps + self.jumps,
+            note_duration=note_duration,
+            velocity=velocity,
+            channel=channel,
+        )
+
 
 class Mode(Scale):
     @cache
@@ -154,3 +163,10 @@ class Mode(Scale):
     def __hash__(self):
         return hash(self.jumps)
 
+    def play_midi(self, note_duration, velocity, channel):
+        emit_midi_sequence(
+            jumps=self.jumps,
+            note_duration=note_duration,
+            velocity=velocity,
+            channel=channel,
+        )
