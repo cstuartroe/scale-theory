@@ -23,6 +23,10 @@ def resolve_cycle_name(edo_steps, cycle_name):
         return Cycle(jumps)
 
 
+def method_builder(method, args):
+    return lambda cycle: method(cycle, *([args] if len(args) > 0 else ()))
+
+
 def resolve_priorities(priorities_string):
     if priorities_string in PRIORITY_SEQUENCES:
         return PRIORITY_SEQUENCES[priorities_string]
@@ -38,7 +42,7 @@ def resolve_priorities(priorities_string):
         method_name = m.groups()[0]
         args = m.captures(3)
         method = CYCLE_STATS[method_name]
-        priorities.append(lambda cycle: method(cycle, *([args] if len(args) > 0 else ())))
+        priorities.append(method_builder(method, args))
 
     return priorities
 
