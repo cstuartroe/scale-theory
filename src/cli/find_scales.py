@@ -8,11 +8,12 @@ def list_best_cycles_from(cycles: List[Cycle], priorities):
     for cycle in cycles:
         cycle_stats.append((cycle, tuple(p(cycle) for p in priorities)))
 
+    print(len(cycles), "cycles found.")
+
     cycle_stats.sort(key=lambda x: x[1])
     for cycle, stats in cycle_stats[-100:]:
         named_parents = [p for p in cycle.parents() if p.name() is not None]
         print(cycle, *stats, cycle.name() or "", *named_parents)
-    print(len(cycles), "cycles found.")
 
 
 def list_best_cycles(scale_size, edo_steps, priorities):

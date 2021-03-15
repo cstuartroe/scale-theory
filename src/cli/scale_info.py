@@ -3,7 +3,7 @@ from src.scale_properties.cycle_stats import (
     count_present_consonances,
     count_dissonances,
     interval_diversity,
-    count_total_chords,
+    count_chords,
     count_extensions,
     proper,
 )
@@ -34,11 +34,11 @@ def scale_info(cycle: Cycle):
     for ivl in cycle.canon_mode.intervals():
         print(ivl.cents())
 
-    print(f"Consonant interval diversity: {count_present_consonances(cycle, cycle.edo().consonances)}/{len(cycle.edo().consonances)}")
-    print("Total dissonances:", count_dissonances(cycle, cycle.edo().dissonances))
+    print(f"Consonant interval diversity: {count_present_consonances(cycle)}/{len(cycle.edo().consonances)}")
+    print("Total dissonances:", count_dissonances(cycle))
     print(f"Total interval diversity: {interval_diversity(cycle)}/{cycle.edo().steps - 1}")
     print(dict([(ivl.name(), count) for ivl, count in cycle.interval_counts().items()]))
-    print("Total chords:", *[count_total_chords(cycle, [third])[third] for third in ["septimal m3", "m3", "n3", "maj3", "septimal maj3"]])
+    print("Total chords:", *[count_chords(cycle, [third])[third] for third in ["septimal m3", "m3", "n3", "maj3", "septimal maj3"]])
     print("Total tetrachords:")
     for name, degrees in TETRACHORDS.items():
         if count_extensions(cycle, degrees) > 0:

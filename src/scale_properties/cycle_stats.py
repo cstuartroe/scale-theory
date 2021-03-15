@@ -20,11 +20,7 @@ def interval_diversity(cycle: Cycle, important_intervals: List[str] = None):
     return len(intervals)
 
 
-def count_chord_richness(cycle: Cycle, third_names: List[str]):
-    min(count_total_chords(cycle, third_names).values())
-
-
-def count_total_chords(cycle: Cycle, third_names: List[str]):
+def count_chords(cycle: Cycle, third_names: List[str]):
     fifth = cycle.edo().approximate(JI.by_name("p5"))
     chords = dict([(name, 0) for name in third_names])
     for mode in cycle.modes:
@@ -33,6 +29,14 @@ def count_total_chords(cycle: Cycle, third_names: List[str]):
                 if third in mode.interval_set():
                     chords[name] += 1
     return chords
+
+
+def count_chord_richness(cycle: Cycle, third_names: List[str]):
+    return min(count_chords(cycle, third_names).values())
+
+
+def count_total_chords(cycle: Cycle, third_names: List[str]):
+    return sum(count_chords(cycle, third_names).values())
 
 
 def count_distinct_chord_roots(cycle: Cycle, third_names: List[str]):
@@ -59,12 +63,12 @@ def count_extensions(cycle: Cycle, ivl_names: List[str]):
 # In 31EDO in particular there are a number of intervals I consider to be intermediate
 # Consonances and especially dissonances can be quite EDO-specific, so passing them in by name won't do
 
-def count_present_consonances(cycle: Cycle, consonances: List[EDOInterval]):
-    return len([c for c in consonances if c in cycle.interval_set()])
+def count_present_consonances(cycle: Cycle):
+    return len(set(cycle.edo().consonances) & cycle.interval_set())
 
 
-def count_dissonances(cycle: Cycle, dissonances: List[EDOInterval]):
-    return sum([cycle.interval_counts()[d] for d in dissonances])
+def count_dissonances(cycle: Cycle):
+    return -sum([cycle.interval_counts().get(d, 0) for d in cycle.edo().dissonances])
 
 
 class Proper:
@@ -97,6 +101,8 @@ _methods = [
     count_total_chords,
     count_distinct_chord_roots,
     count_extensions,
+    count_present_consonances,
+    count_dissonances,
 ]
 
 CYCLE_STATS = dict([
