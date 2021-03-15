@@ -5,14 +5,17 @@ from simplecoremidi import send_midi
 from .midi_numbers import BASE_MIDI_NOTE
 
 
-def emit_midi(midi_number, duration_ms=500, velocity=64, channel=0):
-    send_midi((144 + channel, midi_number, velocity))
+def emit_midi(midi_numbers, duration_ms=500, velocity=64, channel=0):
+    for midi_number in midi_numbers:
+        send_midi((144 + channel, midi_number, velocity))
     try:
         time.sleep(duration_ms / 1000)
     except KeyboardInterrupt:
-        send_midi((128 + channel, midi_number, velocity))
+        for midi_number in midi_numbers:
+            send_midi((128 + channel, midi_number, velocity))
         raise
-    send_midi((128 + channel, midi_number, velocity))
+    for midi_number in midi_numbers:
+        send_midi((128 + channel, midi_number, velocity))
 
 
 def sequence_from_jumps(jumps: List[int], starting_note: int):
@@ -39,6 +42,20 @@ def sequence_with_no_dead_keys(jumps, target_starting_note):
     return sequence_from_jumps(jumps, target_starting_note)
 
 
+def emit_midi_chord(jumps, note_duration, velocity, channel, starting_note=BASE_MIDI_NOTE):
+    emit_midi(
+        midi_numbers=sequence_with_no_dead_keys(jumps, starting_note),
+        duration_ms=note_duration,
+        velocity=velocity,
+        channel=channel,
+    )
+
+
 def emit_midi_sequence(jumps, note_duration, velocity, channel, starting_note=BASE_MIDI_NOTE):
     for note_number in sequence_with_no_dead_keys(jumps, starting_note):
-        emit_midi(note_number, duration_ms=note_duration, velocity=velocity, channel=channel)
+        emit_midi(
+            midi_numbers=[note_number],
+            duration_ms=note_duration,
+            velocity=velocity,
+            channel=channel,
+        )

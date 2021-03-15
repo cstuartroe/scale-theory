@@ -3,7 +3,7 @@ from src.ji.consonance import DISSONANCE_FUNCTIONS
 
 
 def make_parser(description, edo_steps=True, cycle=False, priorities=False, scale_size=False, max_ratio=False,
-                dissonance_function=False):
+                dissonance_function=False, duration=False, velocity=False, channel=False):
     parser = argparse.ArgumentParser(description=description)
 
     if cycle:
@@ -29,5 +29,17 @@ def make_parser(description, edo_steps=True, cycle=False, priorities=False, scal
     if dissonance_function:
         parser.add_argument("-f", "--dissonance_function_name", choices=DISSONANCE_FUNCTIONS.keys(), default="euler",
                             help="Choice of dissonance function to use for ranking")
+
+    if duration:
+        parser.add_argument("-D", "--note_duration", nargs='?', default=500, type=int, metavar="n",
+                            help="The duration in ms of each note in the scale")
+
+    if velocity:
+        parser.add_argument("-v", "--velocity", nargs='?', default=64, type=int, metavar='n',
+                            help="The midi velocity of each note (0-255)")
+
+    if channel:
+        parser.add_argument('-c', '--channel', nargs='?', default=0, type=int, metavar='n',
+                            help="The midi channel to send scale to")
 
     return parser

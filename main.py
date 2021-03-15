@@ -9,6 +9,7 @@ from src.cli import (
     FindJustChords,
     DegreeApproximations,
     PlayMidi,
+    Quiz,
 )
 from src.cli.utils import resolve, ScaleTheoryError
 
@@ -21,6 +22,7 @@ COMMANDS = {
     "just_chords": FindJustChords,
     "degree_approximation": DegreeApproximations,
     "play": PlayMidi,
+    "quiz": Quiz,
 }
 
 
