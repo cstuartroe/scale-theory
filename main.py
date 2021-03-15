@@ -10,6 +10,7 @@ from src.cli import (
     DegreeApproximations,
     PlayMidi,
     Quiz,
+    Metastats,
 )
 from src.cli.utils import resolve, ScaleTheoryError
 
@@ -23,6 +24,7 @@ COMMANDS = {
     "degree_approximation": DegreeApproximations,
     "play": PlayMidi,
     "quiz": Quiz,
+    "metastats": Metastats,
 }
 
 

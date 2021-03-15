@@ -7,3 +7,4 @@ from .find_just_chords import FindJustChords
 from .degree_approximations import DegreeApproximations
 from .play_midi import PlayMidi
 from .quiz import Quiz
+from .metastats import Metastats
