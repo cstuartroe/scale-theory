@@ -3,16 +3,16 @@ in scope to continue living with my other miscellaneous small projects. For its
 git history prior to the first commit of this repo, see 
 [here](https://github.com/cstuartroe/misc/tree/master/Python/31EDO).
 
-### Set up
+### Setup
 
 ```
 pip install -r requirements.txt
 ```
 
-### To generate infographics
+### Usage
 
 ```
-python infographics.py
+python main.py
 ```
 
-It'll create three images, `intervals.png`, `trichords.png`, and `tetrachords.png`. `trichords.png` and `tetrachords.png` are currently kinda janky.
+It'll open a command prompt interface. Type `help` to see available commands. You can enter any command followed by `--help` to get usage tips for that command.
