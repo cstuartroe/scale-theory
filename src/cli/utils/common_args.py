@@ -3,7 +3,7 @@ from src.ji.consonance import DISSONANCE_FUNCTIONS
 
 
 def make_parser(description, edo_steps=True, cycle=False, priorities=False, scale_size=False, max_ratio=False,
-                dissonance_function=False, duration=False, velocity=False, channel=False):
+                dissonance_function=False, duration=False, velocity=False, channel=False, num_results=False):
     parser = argparse.ArgumentParser(description=description)
 
     if cycle:
@@ -23,7 +23,7 @@ def make_parser(description, edo_steps=True, cycle=False, priorities=False, scal
         parser.add_argument("-s", "--edo_steps", metavar="n", nargs='?', type=int, default=31)
 
     if max_ratio:
-        parser.add_argument("-m", "--max_ratio", nargs='?', type=int, metavar='n', default=50,
+        parser.add_argument("-m", "--max_ratio", nargs='?', type=int, metavar='n', default=60,
                             help="The largest integer to use in a frequency ratio")
 
     if dissonance_function:
@@ -41,5 +41,9 @@ def make_parser(description, edo_steps=True, cycle=False, priorities=False, scal
     if channel:
         parser.add_argument('-c', '--channel', nargs='?', default=0, type=int, metavar='n',
                             help="The midi channel to send scale to")
+
+    if num_results:
+        parser.add_argument('-N', '--num_results', nargs='?', default=50, type=int, metavar='n',
+                            help="The number of top results to list")
 
     return parser

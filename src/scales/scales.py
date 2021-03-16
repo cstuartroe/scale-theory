@@ -3,6 +3,7 @@ import re
 from typing import List
 import jxon
 from functools import cache
+from src.ji import JustChord
 from src.edo import EDO, EDOInterval
 from src.midi_utils import emit_midi_sequence, BASE_MIDI_NOTE
 
@@ -78,6 +79,11 @@ class Cycle(Scale, metaclass=CycleMetaclass):
             if Cycle(cycle["jumps"]) == self:
                 return cycle["name"]
 
+        if self.size() <= 5:
+            for just_chord in JustChord.NAMED_CHORDS:
+                if Cycle.from_just_chord(just_chord, self.edo_steps()) == self:
+                    return just_chord.name()
+
     @cache
     def children(self, length=None):
         out = set()
@@ -131,6 +137,10 @@ class Cycle(Scale, metaclass=CycleMetaclass):
             channel=channel,
         )
 
+    @classmethod
+    def from_just_chord(cls, just_chord: JustChord, edo_steps: int):
+        return Mode.from_just_chord(just_chord, edo_steps).cycle()
+
 
 PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71]
 
@@ -173,3 +183,13 @@ class Mode(Scale):
             velocity=velocity,
             channel=channel,
         )
+
+    @classmethod
+    def from_just_chord(cls, just_chord: JustChord, edo_steps: int):
+        edo = EDO(edo_steps)
+        edo_intervals = [edo.approximate(ivl) for ivl in just_chord.intervals()]
+        jumps = []
+        for i in range(len(edo_intervals)):
+            jumps.append(edo_intervals[i].steps - (0 if i == 0 else edo_intervals[i-1].steps))
+        jumps.append(edo_steps - edo_intervals[-1].steps)
+        return cls(jumps)

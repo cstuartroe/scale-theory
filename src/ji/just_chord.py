@@ -1,12 +1,17 @@
 import math
 import jxon
 from .just_interval import JI
+from functools import cache
 
 ORDINALS = [
     "0th",
     "1st",
     "2nd",
     "3rd",
+    "4th",
+    "5th",
+    "6th",
+    "7th",
 ]
 
 with open("static/ji/chords.jxon", "r") as fh:
@@ -21,6 +26,7 @@ class JustChord:
     def __repr__(self):
         return f"JustChord({self.ratio})"
 
+    @cache
     def invert(self, inversion):
         ratio = self.ratio[inversion % len(self.ratio):] + tuple(map(lambda n: n * 2, self.ratio[:inversion % len(self.ratio)]))
         if all(n % 2 == 0 for n in ratio):
@@ -28,12 +34,13 @@ class JustChord:
         else:
             return JustChord(ratio)
 
+    @cache
     def name_and_inversion(self):
         for chord_obj in NAMED_CHORDS:
             chord = JustChord(chord_obj["ratio"])
 
-            for inv in range(self.size()):
-                if self.invert(inv) == chord:
+            for inv in range(min(self.size(), chord.size())):
+                if chord.invert(inv) == self:
                     return chord_obj["name"], inv
 
         return None, None
