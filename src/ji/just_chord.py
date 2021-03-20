@@ -21,7 +21,7 @@ with open("static/ji/chords.jxon", "r") as fh:
 class JustChord:
     def __init__(self, ratio: [int]):
         assert all(ratio[i] < ratio[i+1] for i in range(len(ratio) - 1))
-        self.ratio = tuple([n//math.gcd(*ratio) for n in ratio])
+        self.ratio = tuple(ratio)
 
     def __repr__(self):
         return f"JustChord({self.ratio})"
@@ -72,9 +72,6 @@ class JustChord:
     def cents(self):
         return [ivl.cents() for ivl in self.intervals()]
 
-    def approximation_in(self, edo):
-        return [edo.approximate(ivl) for ivl in self.intervals()]
-
     @classmethod
     def by_name(cls, name: str, inversion=0):
         for chord in NAMED_CHORDS:
@@ -85,16 +82,17 @@ class JustChord:
 JustChord.NAMED_CHORDS = [JustChord(chord["ratio"]) for chord in NAMED_CHORDS]
 
 
+@cache
 def chords_helper(tones, start, max_ratio):
     if tones == 0:
         return [()]
     else:
         out = []
         for tonic in range(start, max_ratio + 1):
-            for tail in chords_helper(tones - 1, tonic + 1, max_ratio):
+            for tail in chords_helper(tones - 1, tonic + 1, min(tonic * 2 - 1, max_ratio)):
                 out.append((tonic, *tail))
         return out
 
 
 def just_chords(tones, max_ratio):
-    return set([JustChord(chord) for chord in chords_helper(tones, 2, max_ratio) if (chord[-1] / chord[0] < 2)])
+    return [JustChord(chord) for chord in chords_helper(tones, 2, max_ratio) if math.gcd(*chord) == 1]

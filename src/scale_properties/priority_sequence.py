@@ -57,8 +57,15 @@ PRIORITY_SEQUENCES = {
     ),
 
     "consonance_priorities": (
+        count18s,
+        lambda cycle: count_total_chords(cycle, ["septimal m3", "m3", "maj3"]),
         lambda cycle: count_present_consonances(cycle),
+        interval_diversity,
         lambda cycle: count_dissonances(cycle),
-        lambda cycle: count_total_chords(cycle, ["septimal m3", "m3", "maj3"])
     ),
+
+    "minor_chord_priorities": (
+        lambda cycle: count_total_chords(cycle, ["septimal m3"]),
+        count18s,
+    )
 }

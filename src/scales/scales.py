@@ -71,7 +71,7 @@ class Cycle(Scale, metaclass=CycleMetaclass):
         return self.jumps == other.jumps
 
     def __repr__(self):
-        return f"Cycle({self.jumps})"
+        return f"Cycle({self.jumps})".replace(" ", "")
 
     @cache
     def name(self):
@@ -171,7 +171,7 @@ class Mode(Scale):
         return self.jumps == other.jumps
 
     def __repr__(self):
-        return f"Mode({self.jumps})"
+        return f"Mode({self.jumps})".replace(" ", "")
 
     def __hash__(self):
         return hash(self.jumps)
