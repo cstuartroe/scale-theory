@@ -9,8 +9,8 @@ from src.cli import (
     FindJustChords,
     DegreeApproximations,
     PlayMidi,
-    Quiz,
     Metastats,
+    quiz,
 )
 from src.cli.utils import resolve, ScaleTheoryError
 
@@ -23,8 +23,13 @@ COMMANDS = {
     "just_chords": FindJustChords,
     "degree_approximation": DegreeApproximations,
     "play": PlayMidi,
-    "quiz": Quiz,
     "metastats": Metastats,
+}
+
+MODULES = {
+    "quiz": {
+        "intervals": quiz.IntervalQuiz,
+    },
 }
 
 
@@ -34,6 +39,29 @@ def run_command(command):
             namespace = command.parser.parse_args(shlex.split(argstring))
         except SystemExit:
             return  # argparse likes to SystemExit after --help is called
+        try:
+            kwargs = resolve(namespace, getattr(command, 'pass_edo_steps', False))
+            command.run(**kwargs)
+        except ScaleTheoryError as e:
+            print(e)
+
+    return f
+
+
+def run_module(module_name):
+    def f(argstring):
+        command_name, *args = shlex.split(argstring)
+        if command_name in MODULES[module_name]:
+            command = MODULES[module_name][command_name]
+        else:
+            print(f"No command called {module_name} {command_name}")
+            return
+
+        try:
+            namespace = command.parser.parse_args(args)
+        except SystemExit:
+            return
+
         try:
             kwargs = resolve(namespace, getattr(command, 'pass_edo_steps', False))
             command.run(**kwargs)
@@ -55,9 +83,16 @@ class ExplorerShell(cmd2.Cmd):
             command.parser.prog = command_name
             setattr(self, "do_" + command_name, run_command(command))
 
+        for module_name in MODULES:
+            setattr(self, "do_" + module_name, run_module(module_name))
+
     def do_help(self, arg):
-        for name, command in COMMANDS.items():
+        for name in COMMANDS:
             print(name)
+
+        for module_name, command_d in MODULES.items():
+            for command_name in command_d:
+                print(module_name, command_name)
 
 
 if __name__ == "__main__":

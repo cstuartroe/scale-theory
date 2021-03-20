@@ -1,7 +1,7 @@
 from random import randrange
 from src.midi_utils import emit_midi_sequence, emit_midi_chord
 from src.edo import EDO
-from .utils import make_parser, ScaleTheoryError
+from src.cli.utils import make_parser, ScaleTheoryError
 
 parser = make_parser(
     description="Quiz your ability to distinguish intervals and chords",
@@ -36,7 +36,6 @@ class Round:
                 except ValueError:
                     print("Must be an integer or a scale degree:", self.edo.names())
 
-
     def play(self):
         if self.direction == "asc":
             emit_midi_sequence(
@@ -61,7 +60,7 @@ class Round:
             raise ValueError
 
 
-class Quiz:
+class IntervalQuiz:
     parser = parser
 
     pass_edo_steps = True
