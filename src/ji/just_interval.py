@@ -1,6 +1,5 @@
 import math
 import jxon
-from .consonance import euler_dissonance, vogel_dissonance, gill_purves_dissonance
 
 
 with open("static/ji/intervals.jxon", "r") as fh:

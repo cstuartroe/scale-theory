@@ -1,6 +1,5 @@
 from typing import List
 from src.ji import JI
-from src.edo import EDOInterval
 from src.scales import Cycle
 
 

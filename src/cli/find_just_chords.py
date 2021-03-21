@@ -1,9 +1,7 @@
 from tabulate import tabulate
 from src.ji import just_chords
-from src.edo import EDO
 from src.scales import Mode
 from .utils import make_parser
-from timer import Timer
 
 
 MAJOR_EDOS = [12, 17, 19, 22, 24, 31]

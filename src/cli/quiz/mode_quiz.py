@@ -1,5 +1,4 @@
 from random import randrange, choice
-from src.midi_utils import emit_midi_sequence
 from src.edo import EDOInterval
 from src.scales import Cycle
 from .common import quiz_parser, quiz_loop, get_bass_note
@@ -32,7 +31,7 @@ class ModeQuiz:
                         available_ivls = set(mode.intervals())
 
                     ivl = choice(list(available_ivls))
-                    if ivl != ivls[-1]:  # and abs(ivls[-1].cents() - ivl.cents()) <= max_leap:
+                    if ivl != ivls[-1]:
                         ivls.append(ivl)
                         available_ivls.remove(ivl)
 

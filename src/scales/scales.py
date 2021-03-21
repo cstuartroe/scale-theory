@@ -5,7 +5,7 @@ import jxon
 from functools import cache
 from src.ji import JustChord
 from src.edo import EDO, EDOInterval
-from src.midi_utils import emit_midi_sequence, BASE_MIDI_NOTE
+from src.midi_utils import emit_midi_sequence
 
 
 class Scale:
