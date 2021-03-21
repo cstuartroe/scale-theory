@@ -29,6 +29,8 @@ COMMANDS = {
 MODULES = {
     "quiz": {
         "intervals": quiz.IntervalQuiz,
+        "melody": quiz.MelodyQuiz,
+        "modes": quiz.ModeQuiz,
     },
 }
 
