@@ -3,7 +3,7 @@ from src.midi_utils import emit_midi_sequence, emit_midi_chord
 from src.edo import EDO
 from .common import quiz_parser, quiz_loop
 
-parser = quiz_parser("Distinguish intervals")
+parser = quiz_parser("distinguish intervals")
 parser.add_argument("-d", "--direction", nargs='?', default="asc", type=str, choices=["asc", "desc", "unison"],
                     help="Which direction to play notes in")
 
@@ -30,12 +30,14 @@ class IntervalRound:
                 starting_note=self.bass_note + self.interval,
                 **self.midi_params,
             )
+
         elif self.direction == "unison":
             emit_midi_chord(
                 [self.interval],
                 starting_note=self.bass_note,
                 **self.midi_params,
             )
+
         else:
             raise ValueError
 
@@ -48,6 +50,7 @@ class IntervalQuiz:
     @staticmethod
     def run(edo_steps, direction, **kwargs):
         edo = EDO(edo_steps)
+        print("Interval names:", ", ".join(edo.names()))
 
         def genf():
             interval = randrange(1, edo_steps)
@@ -61,4 +64,4 @@ class IntervalQuiz:
                 **kwargs,
             }
 
-        quiz_loop(genf, IntervalRound, edo.names())
+        quiz_loop(genf, IntervalRound)
