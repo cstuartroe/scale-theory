@@ -5,7 +5,7 @@ import jxon
 from functools import cache
 from src.ji import JustChord
 from src.edo import EDO, EDOInterval
-from src.midi_utils import emit_midi_sequence
+from src.midi_utils import emit_midi_sequence, sequence_from_jumps
 
 
 class Scale:
@@ -131,7 +131,7 @@ class Cycle(Scale, metaclass=CycleMetaclass):
 
     def play_midi(self, note_duration, velocity, channel):
         emit_midi_sequence(
-            jumps=self.jumps + self.jumps,
+            sequence_from_jumps(self.jumps + self.jumps),
             note_duration=note_duration,
             velocity=velocity,
             channel=channel,
@@ -178,7 +178,7 @@ class Mode(Scale):
 
     def play_midi(self, note_duration, velocity, channel):
         emit_midi_sequence(
-            jumps=self.jumps,
+            sequence_from_jumps(self.jumps),
             note_duration=note_duration,
             velocity=velocity,
             channel=channel,

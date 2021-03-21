@@ -5,11 +5,11 @@ from simplecoremidi import send_midi
 from .midi_numbers import BASE_MIDI_NOTE
 
 
-def emit_midi(midi_numbers, duration_ms=500, velocity=64, channel=0):
+def emit_midi(midi_numbers, note_duration=500, velocity=64, channel=0):
     for midi_number in midi_numbers:
         send_midi((144 + channel, midi_number, velocity))
     try:
-        time.sleep(duration_ms / 1000)
+        time.sleep(note_duration / 1000)
     except KeyboardInterrupt:
         for midi_number in midi_numbers:
             send_midi((128 + channel, midi_number, velocity))
