@@ -11,7 +11,7 @@ MAJOR_EDOS = [12, 17, 19, 22, 24, 31]
 
 parser = make_parser(description="List just chords in order of consonance", edo_steps=False, dissonance_function=True,
                      max_ratio=True, num_results=True)
-parser.add_argument("-t", "--tones", nargs='?', type=int, metavar='n', default=3,
+parser.add_argument("-t", "--tones", type=int, metavar='n', default=3,
                     help="The number of tones in the chord")
 
 

@@ -10,7 +10,7 @@ parser = make_parser(
     channel=True,
 )
 
-parser.add_argument('-m', '--mode', nargs='?', default=None, type=str, metavar='n',
+parser.add_argument('-m', '--mode', default=None, type=str, metavar='n',
                     help="The mode(s) of a cycle to play. Leave blank to play 2 octaves, specify a mode with a number, "
                          "or specify 'all' to play all modes in order")
 

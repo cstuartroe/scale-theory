@@ -5,7 +5,7 @@ from .utils import make_parser
 
 parser = make_parser(description="Identify which just intervals each step of a given EDO system approximates",
                      edo_steps=True, max_ratio=True, dissonance_function=True)
-parser.add_argument("-t", "--threshold", nargs='?', default=15, type=int, metavar='n',
+parser.add_argument("-t", "--threshold", default=15, type=int, metavar='n',
                     help="The highest dissonance allowed for an interval to be shown")
 
 

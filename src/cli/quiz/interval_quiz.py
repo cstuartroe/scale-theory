@@ -3,7 +3,7 @@ from src.edo import EDO, EDOInterval
 from .common import quiz_parser, quiz_loop, get_bass_note
 
 parser = quiz_parser("distinguish intervals")
-parser.add_argument("-d", "--direction", nargs='?', default="asc", type=str, choices=["asc", "desc", "unison"],
+parser.add_argument("-d", "--direction", default="asc", type=str, choices=["asc", "desc", "unison"],
                     help="Which direction to play notes in")
 
 
