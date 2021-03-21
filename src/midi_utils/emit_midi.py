@@ -26,7 +26,7 @@ def sequence_from_jumps(jumps: List[int], starting_note: int):
 
 
 # I'm using the free version of pianoteq which dulls some keys
-DEAD_KEYS = {0, 1, 5, 6, 10, 11, 15, 16, 17, 42, 44, 46, 85, 87, 90, 92, 94, 116, 117, 121, 122, 123}
+DEAD_KEYS = {0, 1, 5, 6, 10, 11, 15, 16, 17, 42, 44, 46, 84, 85, 86, 87, 90, 92, 94, 116, 117, 121, 122, 123}
 
 
 def sequence_with_no_dead_keys(jumps, target_starting_note):

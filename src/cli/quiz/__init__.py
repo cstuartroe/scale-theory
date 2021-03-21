@@ -1,1 +1,1 @@
-from .quiz import IntervalQuiz
+from .interval_quiz import IntervalQuiz
