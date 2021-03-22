@@ -26,6 +26,10 @@ chords: chord_array = [
     ratio: [10, 15, 18],
   },
   {
+    name: "dom7",
+    ratio: [36, 45, 54, 64],
+  },
+  {
     name: "maj7",
     ratio: [8, 10, 12, 15],
   },
@@ -52,6 +56,10 @@ chords: chord_array = [
   {
     name: "septimal minor",
     ratio: [6, 7, 9],
+  },
+  {
+    name: "septimal m7",
+    ratio: [24, 28, 36, 42],
   },
   {
     name: "tight cluster",
@@ -86,12 +94,28 @@ chords: chord_array = [
     ratio: [16, 20, 25],
   },
   {
+    name: "m add6",
+    ratio: [30, 36, 45, 50],
+  },
+  {
     name: "sus2 add6",
     ratio: [16, 18, 24, 27],
   },
   {
+    name: "m add9",
+    ratio: [40, 45, 48, 60],
+  },
+  {
+    name: "m add11",
+    ratio: [30, 36, 40, 45],
+  },
+  {
     name: "maj add9",
     ratio: [8, 9, 10, 12],
+  },
+  {
+    name: "maj add11",
+    ratio: [12, 15, 16, 18],
   },
   {
     name: "septimal madd11",

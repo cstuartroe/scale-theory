@@ -57,3 +57,7 @@ def emit_midi_notes(notes: List[List[int]], **kwargs):
 
 def emit_midi_sequence(seq: List[int], **kwargs):
     emit_midi_notes([[n] for n in seq], **kwargs)
+
+
+# Pianoteq needs to be waken up every time I start a new process for some reason
+emit_midi([0])

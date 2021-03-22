@@ -139,7 +139,7 @@ class Cycle(Scale, metaclass=CycleMetaclass):
 
     @classmethod
     def from_just_chord(cls, just_chord: JustChord, edo_steps: int):
-        return Mode.from_just_chord(just_chord, edo_steps).cycle()
+        return EDOChord.from_just_chord(just_chord, edo_steps).cycle()
 
 
 PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71]
@@ -184,6 +184,8 @@ class Mode(Scale):
             channel=channel,
         )
 
+
+class EDOChord(Mode):
     @classmethod
     def from_just_chord(cls, just_chord: JustChord, edo_steps: int):
         edo = EDO(edo_steps)
@@ -193,3 +195,45 @@ class Mode(Scale):
             jumps.append(edo_intervals[i].steps - (0 if i == 0 else edo_intervals[i-1].steps))
         jumps.append(edo_steps - edo_intervals[-1].steps)
         return cls(jumps)
+
+    @classmethod
+    def by_name(cls, name, edo_steps, inversion=0):
+        return cls.from_just_chord(JustChord.by_name(name, inversion), edo_steps)
+
+    @cache
+    def just_chord(self):
+        for just_chord in JustChord.NAMED_CHORDS:
+            if just_chord.size() == self.size():
+                for inv in just_chord.inversions():
+                    if EDOChord.from_just_chord(inv, self.edo_steps()) == self:
+                        return inv
+
+    def name_with_inversion(self):
+        return self.just_chord().name_with_inversion()
+
+    def name_and_inversion(self):
+        return self.just_chord().name_and_inversion()
+
+    def name(self):
+        return self.just_chord().name()
+
+    @cache
+    def invert(self, inversion):
+        return EDOChord(self.jumps[inversion:] + self.jumps[:inversion])
+
+    @cache
+    def inversions(self):
+        return [self.invert(i) for i in range(self.size())]
+
+    def __repr__(self):
+        return f"EDOChord({self.jumps})".replace(" ", "")
+
+    # some, e.g. h7, may be excluded in smaller EDOs
+    @classmethod
+    def used_shape_names(cls, shape_names, edo_steps):
+        out = []
+        for shape_name in shape_names:
+            ec = EDOChord.by_name(shape_name, edo_steps)
+            if ec.name() not in out:
+                out.append(ec.name())
+        return out

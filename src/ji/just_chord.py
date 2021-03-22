@@ -72,6 +72,9 @@ class JustChord:
     def cents(self):
         return [ivl.cents() for ivl in self.intervals()]
 
+    def inversions(self):
+        return [self.invert(i) for i in range(self.size())]
+
     @classmethod
     def by_name(cls, name: str, inversion=0):
         for chord in NAMED_CHORDS:

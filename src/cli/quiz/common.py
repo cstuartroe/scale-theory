@@ -1,5 +1,5 @@
 from random import randrange
-from src.midi_utils import emit_midi_notes
+from src.midi_utils import emit_midi_notes, emit_midi_sequence
 from src.cli.utils import make_parser
 
 
@@ -17,12 +17,26 @@ def quiz_parser(verb, **kwargs):
     )
 
 
-def get_guess(notes):
+explained_again = False
+explained_individual = False
+
+
+def get_guess(prompt, notes, midi_params):
     while True:
-        guess_str = input("Guess: ")
-        if guess_str == "again":
-            emit_midi_notes(notes)
-        elif guess_str == "quit":
+        global explained_again, explained_individual
+        if not explained_again:
+            print("Enter `again` to hear again")
+            explained_again = True
+        if len(notes) == 1 and not explained_individual:
+            print("Enter `individual` to hear individual notes")
+            explained_individual = True
+
+        guess_str = input(prompt).lower()
+        if guess_str in ["again", "y", "yes"]:
+            emit_midi_notes(notes, **midi_params)
+        elif guess_str in ["individual", "i"]:
+            emit_midi_sequence(notes[0], **midi_params)
+        elif guess_str in ["quit", "q"]:
             raise KeyboardInterrupt
         else:
             return guess_str
@@ -32,19 +46,13 @@ def quiz_loop(generator_function):
     while True:
         answer, notes, midi_params = generator_function()
 
-        emit_midi_notes(notes)
+        emit_midi_notes(notes, **midi_params)
 
-        guess = get_guess(notes)
+        guess = get_guess("Guess: ", notes, midi_params)
 
         if guess == answer:
             print("Hooray!")
         else:
             print(f"Darn! It was {answer}")
-            while True:
-                play_again = input("Play again? ")
-                if play_again in ['y', 'yes']:
-                    emit_midi_notes(notes)
-                elif play_again == "quit":
-                    raise KeyboardInterrupt
-                else:
-                    break
+
+        get_guess("Hear again? ", notes, midi_params)

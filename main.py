@@ -31,6 +31,7 @@ MODULES = {
         "intervals": quiz.IntervalQuiz,
         "melody": quiz.MelodyQuiz,
         "modes": quiz.ModeQuiz,
+        "shapes": quiz.ChordShapeQuiz,
     },
 }
 
@@ -95,6 +96,8 @@ class ExplorerShell(cmd2.Cmd):
         for module_name, command_d in MODULES.items():
             for command_name in command_d:
                 print(module_name, command_name)
+
+        print('quit')
 
 
 if __name__ == "__main__":

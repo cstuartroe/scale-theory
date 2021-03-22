@@ -1,6 +1,6 @@
 from tabulate import tabulate
 from src.ji import just_chords
-from src.scales import Mode
+from src.scales import EDOChord
 from .utils import make_parser
 
 
@@ -42,7 +42,7 @@ class FindJustChords:
                 chord.name_with_inversion(),
                 ", ".join(map(str, chord.cents())),
                 *(
-                    ",".join([str(jump) for jump in Mode.from_just_chord(chord, edo_steps).jumps])
+                    ",".join([str(jump) for jump in EDOChord.from_just_chord(chord, edo_steps).jumps])
                     for edo_steps in MAJOR_EDOS
                 ),
             ))
