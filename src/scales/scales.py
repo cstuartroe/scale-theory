@@ -228,6 +228,15 @@ class EDOChord(Mode):
     def __repr__(self):
         return f"EDOChord({self.jumps})".replace(" ", "")
 
+    def get_note_numbers(self, base_midi_number):
+        return (
+            base_midi_number,
+            *[
+                base_midi_number + ivl.steps
+                for ivl in self.intervals()
+            ]
+        )
+
     # some, e.g. h7, may be excluded in smaller EDOs
     @classmethod
     def used_shape_names(cls, shape_names, edo_steps):
