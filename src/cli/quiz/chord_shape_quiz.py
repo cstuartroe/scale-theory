@@ -1,6 +1,5 @@
 from random import choice
 from src.scales import EDOChord
-from src.midi_utils import BASE_MIDI_NOTE
 from .common import quiz_parser, quiz_loop, get_bass_note
 
 QUIZZABLE_CHORD_SHAPES = [
@@ -23,8 +22,6 @@ parser.add_argument("-S", "--shapes", metavar="shape", type=str, default=",".joi
                     help="The set of chord shapes to quiz on")
 parser.add_argument("-I", "--with_inversions", action="store_true",
                     help="Whether to quiz on inversions")
-parser.add_argument("-F", "--fixed_root", action="store_true",
-                    help="Whether to keep a fixed root note")
 
 
 class ChordShapeQuiz:
@@ -49,7 +46,7 @@ class ChordShapeQuiz:
             if with_inversions or not fixed_root:
                 ec = choice(ec.inversions())
 
-            bass_note = BASE_MIDI_NOTE if fixed_root else get_bass_note(edo_steps)
+            bass_note = get_bass_note(fixed_root, edo_steps)
             notes = [bass_note] + [bass_note + ivl.steps for ivl in ec.intervals()]
 
             name, inv = ec.name_and_inversion()

@@ -40,7 +40,7 @@ def resolve_priorities(priorities_string):
     for priorities_string in priorities_strings:
         m = regex.fullmatch(r"([\w\d]+)(\((([\w\d ]+),?)*\))?", priorities_string)
         method_name = m.groups()[0]
-        args = m.captures(3)
+        args = [a.strip() for a in m.captures(4)]
         method = CYCLE_STATS[method_name]
         priorities.append(method_builder(method, args))
 

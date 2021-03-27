@@ -1,20 +1,27 @@
 from random import randrange
-from src.midi_utils import emit_midi_notes, emit_midi_sequence
+from src.midi_utils import emit_midi_notes, emit_midi_sequence, BASE_MIDI_NOTE
 from src.cli.utils import make_parser
 
 
-def get_bass_note(edo_steps):
+def get_bass_note(fixed_root, edo_steps):
+    if fixed_root:
+        return BASE_MIDI_NOTE
+
     return randrange(52 - edo_steps, 52 + edo_steps)
 
 
-def quiz_parser(verb, **kwargs):
-    return make_parser(
+def quiz_parser(verb, fixed_root=True, **kwargs):
+    parser = make_parser(
         description=f"Quiz your ability to {verb}",
         duration=True,
         velocity=True,
         channel=True,
         **kwargs,
     )
+    if fixed_root:
+        parser.add_argument("-F", "--fixed_root", action="store_true",
+                            help="Whether to keep a fixed root note")
+    return parser
 
 
 explained_again = False
@@ -43,16 +50,23 @@ def get_guess(prompt, notes, midi_params):
 
 
 def quiz_loop(generator_function):
+    tried = 0
+    correct = 0
+
     while True:
+        tried += 1
         answer, notes, midi_params = generator_function()
 
         emit_midi_notes(notes, **midi_params)
 
         guess = get_guess("Guess: ", notes, midi_params)
 
-        if guess == answer:
+        if guess == answer or guess in answer.split("/"):
             print("Hooray!")
+            correct += 1
         else:
             print(f"Darn! It was {answer}")
+
+        print(f"{correct}/{tried} ({round(100*correct/tried)}%)")
 
         get_guess("Hear again? ", notes, midi_params)
