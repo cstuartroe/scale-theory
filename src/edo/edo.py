@@ -34,6 +34,15 @@ class EDOInterval(Interval):
     def name(self):
         return EDO(self.edo_steps).names()[self.steps]
 
+    @classmethod
+    def by_name(cls, name, edo_steps):
+        names = EDO(edo_steps).names()
+        for i, n in enumerate(names):
+            if name == n or name in n.split("/"):
+                return cls(i, edo_steps)
+
+        raise ValueError(f"{name} is not the name of a scale degree in {edo_steps}EDO")
+
     def __repr__(self):
         return f"EDOInterval({self.steps}, {self.edo_steps})"
 
