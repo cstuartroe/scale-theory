@@ -44,5 +44,7 @@ class JI(Interval):
             if ivl["name"] == name:
                 return cls(num=ivl["num"], denom=ivl["denom"])
 
+        raise ValueError(f"No just interval called {name}")
+
 
 JI.NAMED_INTERVALS = [JI(num=ivl["num"], denom=ivl["denom"]) for ivl in NAMED_INTERVALS]
