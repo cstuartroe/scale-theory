@@ -25,3 +25,11 @@ def midi_name_to_number(midi_name):
             return LETTERS_TO_NUMBERS_12_EDO[letter] + (int(octave) + 1) * 12
 
     raise ValueError(f"Invalid MIDI note name: {midi_name}")
+
+
+def midi_number_frequency(midi_number, edo_steps, base_midi_note, base_frequency):
+    return round(base_frequency*2**((midi_number - base_midi_note)/edo_steps), 1)
+
+
+def midi_number_standard_frequency(midi_number):
+    return midi_number_frequency(midi_number, 12, 69, 440)

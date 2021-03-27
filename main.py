@@ -10,6 +10,7 @@ from src.cli import (
     DegreeApproximations,
     PlayMidi,
     Metastats,
+    FindPianoteqDiapason,
     quiz,
 )
 from src.cli.utils import resolve, ScaleTheoryError
@@ -24,6 +25,7 @@ COMMANDS = {
     "degree_approximation": DegreeApproximations,
     "play": PlayMidi,
     "metastats": Metastats,
+    "diapason": FindPianoteqDiapason,
 }
 
 MODULES = {
