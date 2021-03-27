@@ -489,6 +489,14 @@ scales_31edo: scales = [
     name: "consonant octatonic B",
     jumps: [5, 2, 3, 3, 5, 5, 5, 3],
   },
+  {
+    name: "handcrafted octatonic",
+    jumps: [4, 3, 3, 3, 5, 3, 4, 6],
+  },
+  {
+    name: "handcrafted nonatonic",
+    jumps: [4, 3, 3, 3, 5, 3, 4, 3, 3],
+  },
 ]
 
 export default scales_31edo;
