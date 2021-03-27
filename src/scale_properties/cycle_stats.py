@@ -102,6 +102,7 @@ _methods = [
     count_extensions,
     count_present_consonances,
     count_dissonances,
+    proper,
 ]
 
 CYCLE_STATS = dict([
