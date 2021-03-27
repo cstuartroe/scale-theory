@@ -23,12 +23,12 @@ def list_best_cycles(scale_size, edo_steps, priorities):
 class ListCycles:
     parser = make_parser(
         description="List the best cycles according to a set of criteria",
-        scale_size=True,
+        length=True,
         priorities=True,
     )
 
     pass_edo_steps = True
 
     @staticmethod
-    def run(edo_steps, scale_size, priorities):
-        list_best_cycles(scale_size, edo_steps, priorities)
+    def run(edo_steps, length, priorities):
+        list_best_cycles(length, edo_steps, priorities)

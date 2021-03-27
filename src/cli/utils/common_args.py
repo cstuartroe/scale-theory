@@ -2,13 +2,13 @@ import argparse
 from src.ji.consonance import DISSONANCE_FUNCTIONS
 
 
-def make_parser(description, edo_steps=True, cycle=False, priorities=False, scale_size=False, max_ratio=False,
+def make_parser(description, edo_steps=True, cycle=False, priorities=False, length=False, max_ratio=False,
                 dissonance_function=False, duration=False, velocity=False, channel=False, num_results=False):
     parser = argparse.ArgumentParser(description=description)
 
     if cycle:
-        parser.add_argument("cycle_name", metavar="cycle", type=str,
-                            help="The cycle to print information about - may be a "
+        parser.add_argument("-C", "--cycle_name", metavar="cycle", type=str, default="diatonic",
+                            help="The cycle to take intervals from - may be a "
                                  "name or a comma-separated list of jumps")
 
     if priorities:
@@ -16,8 +16,8 @@ def make_parser(description, edo_steps=True, cycle=False, priorities=False, scal
                             help="Either the name of an existing priorities list, "
                                  "or a comma-separated list of priorities")
 
-    if scale_size:
-        parser.add_argument('-l', '--scale_size', metavar='n', type=int, default=7,  help='number of notes in the scale')
+    if length:
+        parser.add_argument('-l', '--length', metavar='n', type=int, default=7,  help='number of notes')
 
     if edo_steps:
         parser.add_argument("-s", "--edo_steps", metavar="n", type=int, default=31)

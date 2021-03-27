@@ -13,19 +13,19 @@ class Metastats:
     parser = make_parser(
         description="Find the distribution of scale stats",
         priorities=True,
-        scale_size=True,
+        length=True,
     )
 
     pass_edo_steps = True
 
     @staticmethod
-    def run(priorities, scale_size, edo_steps):
+    def run(priorities, length, edo_steps):
         if len(priorities) != 1:
             print("Please supply exactly one stat function")
             return
         stat = priorities[0]
 
-        cycles = all_cycles(scale_size=scale_size, edo_steps=edo_steps)
+        cycles = all_cycles(scale_size=length, edo_steps=edo_steps)
 
         stat_values = [stat(cycle) for cycle in cycles]
         minv = min(stat_values)

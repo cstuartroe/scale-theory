@@ -8,16 +8,14 @@ MAJOR_EDOS = [12, 17, 19, 22, 24, 31]
 
 
 parser = make_parser(description="List just chords in order of consonance", edo_steps=False, dissonance_function=True,
-                     max_ratio=True, num_results=True)
-parser.add_argument("-t", "--tones", type=int, metavar='n', default=3,
-                    help="The number of tones in the chord")
+                     max_ratio=True, num_results=True, length=True)
 
 
 class FindJustChords:
     parser = parser
 
     @staticmethod
-    def run(tones, max_ratio, dissonance_function, num_results):
+    def run(length, max_ratio, dissonance_function, num_results):
         table = [
             (
                 "Ratio",
@@ -31,7 +29,7 @@ class FindJustChords:
             )
         ]
 
-        chords = list(just_chords(tones, max_ratio))
+        chords = list(just_chords(length, max_ratio))
         chords_with_dissonance = [(c, dissonance_function(c)) for c in chords]
         sorted_chords = sorted(chords_with_dissonance, key=lambda x: x[1], reverse=True)
 

@@ -12,9 +12,9 @@ class ListSubcycles:
         description="Find the best subcycles of a given cycle according to a given priorities list",
         cycle=True,
         priorities=True,
-        scale_size=True,
+        length=True,
     )
 
     @staticmethod
-    def run(cycle, priorities, scale_size):
-        list_best_subcycles(cycle, priorities, scale_size)
+    def run(cycle, priorities, length):
+        list_best_subcycles(cycle, priorities, length)

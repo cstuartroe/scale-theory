@@ -9,13 +9,13 @@ METHODS = [find_mode_tuples_naive, find_mode_tuples_largest_step_first]
 class TimeScaleFinding:
     parser = make_parser(
         description='Measure the runtime of various methods for finding scales.',
-        scale_size=True,
+        length=True,
     )
 
     pass_edo_steps = True
 
     @staticmethod
-    def run(scale_size, edo_steps):
+    def run(length, edo_steps):
         t = Timer()
 
         computed_cycles = []
@@ -23,7 +23,7 @@ class TimeScaleFinding:
         for method in METHODS:
             method.cache_clear()
             t.task(method.__name__)
-            modes = list(method(scale_size, edo_steps))
+            modes = list(method(length, edo_steps))
             t.clear()
             computed_cycles.append(set([Cycle(mode) for mode in modes]))
             num_computed_modes[method.__name__] = len(modes)
