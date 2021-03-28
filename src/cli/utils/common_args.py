@@ -2,6 +2,11 @@ import argparse
 from src.ji.consonance import DISSONANCE_FUNCTIONS
 
 
+# This allows commands to specify their own defaults for particular arguments
+def default_if_true(value, default):
+    return default if value is True else value
+
+
 def make_parser(description, edo_steps=True, cycle=False, priorities=False, length=False, max_ratio=False,
                 dissonance_function=False, duration=False, velocity=False, channel=False, num_results=False):
     parser = argparse.ArgumentParser(description=description)
@@ -17,7 +22,8 @@ def make_parser(description, edo_steps=True, cycle=False, priorities=False, leng
                                  "or a comma-separated list of priorities")
 
     if length:
-        parser.add_argument('-l', '--length', metavar='n', type=int, default=7,  help='number of notes')
+        parser.add_argument('-l', '--length', metavar='n', type=int,
+                            default=default_if_true(length, 7),  help='number of notes')
 
     if edo_steps:
         parser.add_argument("-s", "--edo_steps", metavar="n", type=int, default=31)

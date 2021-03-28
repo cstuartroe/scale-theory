@@ -3,7 +3,7 @@ from src.edo import EDOInterval, EDO
 from src.scales import Cycle, EDOChord
 from .common import quiz_parser, quiz_loop, get_bass_note
 
-parser = quiz_parser("transcribe melodies", cycle=True, length=True)
+parser = quiz_parser("transcribe melodies", cycle=True, length=3)
 parser.add_argument("-M", "--max_leap", default=705, type=int,
                     help="Maximum distance in cents between adjacent notes")
 parser.add_argument("-P", "--progression", action="store_true",
