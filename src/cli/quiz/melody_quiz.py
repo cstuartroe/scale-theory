@@ -41,9 +41,9 @@ class MelodyQuiz:
                 p4 = bass_note + EDOInterval.by_name("p4", edo_steps).steps
                 p5 = bass_note + EDOInterval.by_name("p5", edo_steps).steps
                 notes = [
-                    EDOChord.by_name("major", edo_steps).get_note_numbers(p4),
-                    EDOChord.by_name("major", edo_steps).get_note_numbers(p5),
-                    EDOChord.by_name("major", edo_steps).get_note_numbers(bass_note),
+                    EDOChord.by_name("major", edo_steps).invert(1).get_note_numbers(tonic_midi_number=p4),
+                    EDOChord.by_name("major", edo_steps).invert(1).get_note_numbers(tonic_midi_number=p5),
+                    EDOChord.by_name("major", edo_steps).get_note_numbers(tonic_midi_number=bass_note),
                     (),
                 ]
             else:

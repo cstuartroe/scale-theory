@@ -1,5 +1,5 @@
 from random import randrange
-from src.midi_utils import emit_midi_notes, emit_midi_sequence, BASE_MIDI_NOTE
+from src.midi_utils import emit_midi_notes, emit_midi_sequence, BASE_MIDI_NOTE, flatten
 from src.cli.utils import make_parser
 
 
@@ -7,7 +7,7 @@ def get_bass_note(fixed_root, edo_steps):
     if fixed_root:
         return BASE_MIDI_NOTE
 
-    return randrange(52 - edo_steps, 52 + edo_steps)
+    return randrange(52, 52 + edo_steps)
 
 
 def quiz_parser(verb, fixed_root=True, **kwargs):
@@ -42,7 +42,7 @@ def get_guess(prompt, notes, midi_params):
         if guess_str in ["again", "y", "yes"]:
             emit_midi_notes(notes, **midi_params)
         elif guess_str in ["individual", "i"]:
-            emit_midi_sequence(notes[0], **midi_params)
+            emit_midi_sequence(flatten(notes), **midi_params)
         elif guess_str in ["quit", "q"]:
             raise KeyboardInterrupt
         else:

@@ -216,16 +216,6 @@ def intervals_infographic(notes=2, dissonance_function=euler_dissonance, min_to_
     img.save(f"{CHORD_SIZE_NAMES[notes]}s.png")
 
 
-def flatten(l):
-    if type(l) is list:
-        out = []
-        for e in l:
-            out += flatten(e)
-        return out
-    else:
-        return [l]
-
-
 def launchpad_infographic(edo_steps=31, diag_steps=(8, 9, 10, 11,)):
     boards = []
 

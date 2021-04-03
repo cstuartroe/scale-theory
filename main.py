@@ -33,7 +33,7 @@ MODULES = {
         "intervals": quiz.IntervalQuiz,
         "melody": quiz.MelodyQuiz,
         "modes": quiz.ModeQuiz,
-        "shapes": quiz.ChordShapeQuiz,
+        "chords": quiz.ChordsQuiz,
     },
 }
 

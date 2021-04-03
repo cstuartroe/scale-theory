@@ -33,3 +33,13 @@ def midi_number_frequency(midi_number, edo_steps, base_midi_note, base_frequency
 
 def midi_number_standard_frequency(midi_number):
     return midi_number_frequency(midi_number, 12, 69, 440)
+
+
+def flatten(l):
+    if hasattr(l, "__iter__") and type(l) is not str:
+        out = []
+        for e in l:
+            out += flatten(e)
+        return out
+    else:
+        return [l]

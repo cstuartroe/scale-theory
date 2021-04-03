@@ -217,6 +217,9 @@ class EDOChord(Mode):
     def name(self):
         return self.just_chord().name()
 
+    def inversion(self):
+        return self.just_chord().inversion()
+
     @cache
     def invert(self, inversion):
         return EDOChord(self.jumps[inversion:] + self.jumps[:inversion])
@@ -225,17 +228,29 @@ class EDOChord(Mode):
     def inversions(self):
         return [self.invert(i) for i in range(self.size())]
 
+    def invert_absolute(self, inversion):
+        return self.invert(
+            inversion - self.inversion()
+        )
+
     def __repr__(self):
         return f"EDOChord({self.jumps})".replace(" ", "")
 
-    def get_note_numbers(self, base_midi_number):
-        return (
-            base_midi_number,
-            *[
-                base_midi_number + ivl.steps
-                for ivl in self.intervals()
-            ]
-        )
+    def get_note_numbers(self, *, bass_midi_number=None, tonic_midi_number=None):
+        if bass_midi_number is not None and tonic_midi_number is None:
+            return (
+                bass_midi_number,
+                *[
+                    bass_midi_number + ivl.steps
+                    for ivl in self.intervals()
+                ]
+            )
+
+        if bass_midi_number is None and tonic_midi_number is not None:
+            tonic = self.intervals()[-self.inversion()] if self.inversion() != 0 else EDOInterval(0, self.edo_steps())
+            return self.get_note_numbers(bass_midi_number=tonic_midi_number - tonic.steps)
+
+        raise ValueError("Exactly one of bass_midi_number and tonic_midi_number must be None")
 
     # some, e.g. h7, may be excluded in smaller EDOs
     @classmethod

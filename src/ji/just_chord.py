@@ -48,6 +48,9 @@ class JustChord:
     def name(self):
         return self.name_and_inversion()[0]
 
+    def inversion(self):
+        return self.name_and_inversion()[1]
+
     def name_with_inversion(self):
         name, inv = self.name_and_inversion()
         if name is None:
