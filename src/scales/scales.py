@@ -112,6 +112,26 @@ class Cycle(Scale, metaclass=CycleMetaclass):
     def interval_set(self):
         return set([ivl for ivl, count in self.interval_counts().items() if count > 0])
 
+    @cache
+    def interval_vector(self):
+        out = "< "
+        current_degree = None
+        counts = self.interval_counts()
+
+        for i in range(1, self.edo_steps()//2 + 1):
+            ivl = EDOInterval(i, self.edo_steps())
+            degree = ((ivl.cents() - 50) // 200) + 2
+            if degree != current_degree:
+                current_degree = degree
+                if i != 1:
+                    out += " | "
+            else:
+                out += ","
+
+            out += str(counts[ivl])
+
+        return out + " >"
+
     def __hash__(self):
         return hash(self.jumps)
 

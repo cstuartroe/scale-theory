@@ -4,11 +4,15 @@ from src.scales import Cycle
 
 
 def intervals_in_edo(edo, interval_names):
-    return [edo.approximate(JI.by_name(ivl_name)) for ivl_name in interval_names]
+    return set(edo.approximate(JI.by_name(ivl_name)) for ivl_name in interval_names)
 
 
-def count18s(cycle: Cycle):
-    return cycle.interval_counts()[cycle.edo().approximate(JI.by_name("p5"))]
+def count_by_name(cycle: Cycle, name: str):
+    return cycle.interval_counts()[cycle.edo().approximate(JI.by_name(name))]
+
+
+def count_p5s(cycle: Cycle):
+    return count_by_name(cycle, "p5")
 
 
 def interval_diversity(cycle: Cycle, important_intervals: List[str] = None):
@@ -94,7 +98,7 @@ def proper(cycle: Cycle):
 
 
 _methods = [
-    count18s,
+    count_p5s,
     interval_diversity,
     count_chord_richness,
     count_total_chords,

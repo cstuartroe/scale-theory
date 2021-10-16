@@ -262,12 +262,20 @@ scales_31edo: scales = [
     jumps: [8, 5, 5, 8, 5],
   },
   {
-    name: "3,7 super pentatonic",
+    name: "mesobathmic pentatonic A",
     jumps: [7, 5, 6, 7, 6],
   },
   {
-    name: "2,6 super pentatonic",
+    name: "mesobathmic pentatonic B",
     jumps: [6, 5, 7, 6, 7],
+  },
+  {
+    name: "mesobathmic pentatonic C",
+    jumps: [7, 5, 7, 6, 6],
+  },
+  {
+    name: "mesobathmic pentatonic D",
+    jumps: [6, 5, 6, 7, 7],
   },
   {
     name: "nonatonic alpha",
@@ -496,6 +504,82 @@ scales_31edo: scales = [
   {
     name: "handcrafted nonatonic",
     jumps: [4, 3, 3, 3, 5, 3, 4, 3, 3],
+  },
+  {
+    name: "handcrafted heptatonic",
+    jumps: [4, 3, 6, 5, 3, 4, 6],
+  },
+  {
+    name: "downG diatonic",
+    jumps: [6,5,3,5,5,3,4],
+  },
+  {
+    name: "downE diatonic",
+    jumps: [4,4,5,5,5,3,5],
+  },
+  {
+    name: "mesobathmic nonatonic A",
+    jumps: [4, 3, 3, 3, 5, 4, 3, 3, 3],
+  },
+  {
+    name: "mesobathmic nonatonic B",
+    jumps: [3, 4, 3, 3, 5, 4, 3, 3, 3],
+  },
+  {
+    name: "mesobathmic nonatonic C",
+    jumps: [3, 3, 4, 3, 5, 4, 3, 3, 3],
+  },
+  {
+    name: "mesobathmic nonatonic D",
+    jumps: [3, 3, 3, 4, 5, 4, 3, 3, 3],
+  },
+  {
+    name: "mesobathmic nonatonic E",
+    jumps: [4, 3, 3, 3, 5, 3, 4, 3, 3],
+  },
+  {
+    name: "mesobathmic nonatonic F",
+    jumps: [3, 4, 3, 3, 5, 3, 4, 3, 3],
+  },
+  {
+    name: "mesobathmic nonatonic G",
+    jumps: [3, 3, 4, 3, 5, 3, 4, 3, 3],
+  },
+  {
+    name: "mesobathmic nonatonic H",
+    jumps: [3, 3, 3, 4, 5, 3, 4, 3, 3],
+  },
+  {
+    name: "mesobathmic nonatonic I",
+    jumps: [4, 3, 3, 3, 5, 3, 3, 4, 3],
+  },
+  {
+    name: "mesobathmic nonatonic J",
+    jumps: [3, 4, 3, 3, 5, 3, 3, 4, 3],
+  },
+  {
+    name: "mesobathmic nonatonic K",
+    jumps: [3, 3, 4, 3, 5, 3, 3, 4, 3],
+  },
+  {
+    name: "mesobathmic nonatonic L",
+    jumps: [3, 3, 3, 4, 5, 3, 3, 4, 3],
+  },
+  {
+    name: "mesobathmic nonatonic M",
+    jumps: [4, 3, 3, 3, 5, 3, 3, 3, 4],
+  },
+  {
+    name: "mesobathmic nonatonic N",
+    jumps: [3, 4, 3, 3, 5, 3, 3, 3, 4],
+  },
+  {
+    name: "mesobathmic nonatonic O",
+    jumps: [3, 3, 4, 3, 5, 3, 3, 3, 4],
+  },
+  {
+    name: "mesobathmic nonatonic P",
+    jumps: [3, 3, 3, 4, 5, 3, 3, 3, 4],
   },
 ]
 

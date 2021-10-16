@@ -32,12 +32,12 @@ def scale_info(cycle: Cycle):
         print(f"-{mode.jumps[-1]}->  ", "p8")
 
     for ivl in cycle.canon_mode.intervals():
-        print(ivl.cents())
+        print(ivl.cents(), end=", ")
+    print()
 
     print(f"Consonant interval diversity: {count_present_consonances(cycle)}/{len(cycle.edo().consonances)}")
     print("Total dissonances:", count_dissonances(cycle))
-    print(f"Total interval diversity: {interval_diversity(cycle)}/{cycle.edo().steps - 1}")
-    print(dict([(ivl.name(), count) for ivl, count in cycle.interval_counts().items()]))
+    print(cycle.interval_vector())
     print("Total chords:", *[count_chords(cycle, [third])[third] for third in ["septimal m3", "m3", "n3", "maj3", "septimal maj3"]])
     print("Total tetrachords:")
     for name, degrees in TETRACHORDS.items():

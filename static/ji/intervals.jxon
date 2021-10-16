@@ -120,6 +120,11 @@ intervals: interval_array = [
     name: "n3",
     num: 11,
     denom: 9,
+  },
+  {
+    name: "n2",
+    num: 11,
+    denom: 10,
   }
 ]
 

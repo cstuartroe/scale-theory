@@ -4,12 +4,12 @@ from .cycle_stats import *
 PRIORITY_SEQUENCES = {
     "h7n7_priorities": (
         lambda cycle: interval_diversity(cycle, ["n2", "septimal m3", "m3", "n3", "maj3", "h7"]),
-        count18s,
+        count_p5s,
         lambda cycle: count_chord_richness(cycle, ["septimal m3", "m3", "n3", "maj3"]),
         lambda cycle: count_total_chords(cycle, ["m3", "maj3"])
     ),
 
-    "diatonic_priorities": (count18s,),
+    "diatonic_priorities": (proper, count_p5s),
 
     "dioudeteric_priorities": (
         lambda cycle: count_chord_richness(cycle, ["septimal m3", "m3", "n3", "maj3", "septimal maj3"]),
@@ -20,25 +20,25 @@ PRIORITY_SEQUENCES = {
         lambda cycle: interval_diversity(cycle, ["septimal m3", "h7"]),
         lambda cycle: count_chord_richness(cycle, ["septimal m3", "m3", "maj3"]),
         lambda cycle: count_total_chords(cycle, ["m3", "maj3"]),
-        count18s
+        count_p5s
     ),
 
     "theta_subcycle_priorities": (
         lambda cycle: interval_diversity(cycle, ["septimal maj2", "septimal m3", "h7"]),
         lambda cycle: count_chord_richness(cycle, ["septimal m3", "m3", "maj3"]),
         lambda cycle: count_total_chords(cycle, ["m3", "maj3"]),
-        count18s
+        count_p5s
     ),
 
     "god_B_priorities": (
         lambda cycle: interval_diversity(cycle, ["n2", "septimal m3", "m3", "n3", "maj3", "h7"]),
         lambda cycle: count_chord_richness(cycle, ["septimal m3", "m3", "n3", "maj3", "septimal maj3"]),
         lambda cycle: count_total_chords(cycle, ["m3", "maj3"]),
-        count18s
+        count_p5s
     ),
 
     "variety_priorities": (
-        count18s,
+        count_p5s,
         interval_diversity,
     ),
 
@@ -53,11 +53,11 @@ PRIORITY_SEQUENCES = {
         lambda cycle: interval_diversity(cycle, ["n2", "septimal maj2", "septimal m3", "n3", "small septimal tritone"]),
         lambda cycle: count_distinct_chord_roots(cycle, ["septimal m3", "m3", "maj3"]),
         lambda cycle: count_total_chords(cycle, ["septimal m3", "m3", "maj3"]),
-        count18s,
+        count_p5s,
     ),
 
     "consonance_priorities": (
-        count18s,
+        count_p5s,
         lambda cycle: count_total_chords(cycle, ["septimal m3", "m3", "maj3"]),
         lambda cycle: count_present_consonances(cycle),
         interval_diversity,
@@ -66,6 +66,14 @@ PRIORITY_SEQUENCES = {
 
     "minor_chord_priorities": (
         lambda cycle: count_total_chords(cycle, ["septimal m3"]),
-        count18s,
-    )
+        count_p5s,
+    ),
+
+    "n2_not_n3": (
+        lambda cycle: -count_by_name(cycle, "n3"),
+        count_p5s,
+        lambda cycle: count_by_name(cycle, "n2"),
+        proper,
+        lambda cycle: count_total_chords(cycle, ["septimal m3", "m3", "maj3"]),
+    ),
 }

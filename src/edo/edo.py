@@ -112,12 +112,13 @@ class EDO:
         for ivl in PERFECT_INTERVALS:
             named_intervals["p" + ivl] = self.approximate(JI.by_name("p" + ivl)).steps
 
-        aug = named_intervals["maj3"] - named_intervals["m3"]
+        aug = named_intervals["maj2"] - named_intervals["m2"]
         m2 = named_intervals["m2"]
 
         try:
-            assert named_intervals["maj2"] - m2 == aug
-            assert named_intervals["maj7"] - named_intervals["m7"] == aug
+            if self.steps != 15:
+                assert named_intervals["maj2"] - m2 == aug
+                assert named_intervals["maj7"] - named_intervals["m7"] == aug
             assert named_intervals["p4"] - named_intervals["maj3"] == m2
         except AssertionError:
             print(named_intervals)
@@ -149,9 +150,14 @@ class EDO:
                 out[p_steps - aug].append("dim" + ivl)
             if not any_core_names(out[p_steps + aug]):
                 out[p_steps + aug].append("aug" + ivl)
+
+        for ivl in PERFECT_INTERVALS:
             if aug == 2:
-                out[p_steps - 1].append("down" + ivl)
-                out[p_steps + 1].append("up" + ivl)
+                p_steps = named_intervals["p" + ivl]
+                if len(out[p_steps - 1]) == 0:
+                    out[p_steps - 1].append("down" + ivl)
+                if len(out[p_steps + 1]) == 0:
+                    out[p_steps + 1].append("up" + ivl)
 
         if len(out[1]) == 0:
             out[1].append("step")
