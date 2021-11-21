@@ -5,6 +5,38 @@ scales_22edo: scales = [
     name: "diatonic",
     jumps: [4, 4, 1, 4, 4, 4, 1],
   },
+  {
+    name: "major bent diatonic",
+    jumps: [4, 3, 2, 4, 3, 4, 2],
+  },
+  {
+    name: "minor bent diatonic",
+    jumps: [4, 2, 3, 4, 2, 4, 3],
+  }
+  {
+    name: "bent hexatonic",
+    jumps: [6, 3, 4, 2, 4, 3],
+  },
+  {
+    name: "neutral bent heptatonic",
+    jumps: [3, 3, 3, 4, 2, 4, 3],
+  },
+  {
+    name: "major sep3 heptatonic",
+    jumps: [4, 4, 3, 2, 4, 3, 2],
+  },
+  {
+    name: "minor sep3 heptatonic",
+    jumps: [4, 4, 2, 3, 4, 2, 3],
+  },
+  {
+    name: "balanced sep3 heptatonic",
+    jumps: [4, 4, 2, 3, 4, 3, 2],
+  },
+  {
+    name: "wonky sep3 heptatonic",
+    jumps: [4, 4, 3, 2, 4, 2, 3],
+  },
 ]
 
 export default scales_22edo;

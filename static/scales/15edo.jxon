@@ -1,0 +1,38 @@
+import scales from "./scales.jxsd";
+
+scales_15edo: scales = [
+  {
+    name: "major bent diatonic",
+    jumps: [3, 2, 1, 3, 2, 3, 1],
+  },
+  {
+    name: "minor bent diatonic",
+    jumps: [3, 1, 2, 3, 1, 3, 2],
+  },
+  {
+    name: "bent hexatonic",
+    jumps: [4, 2, 3, 1, 3, 2],
+  },
+  {
+    name: "neutral bent heptatonic",
+    jumps: [2, 2, 2, 3, 1, 3, 2],
+  },
+  {
+    name: "fractured heptatonic A",
+    jumps: [3, 3, 2, 1, 3, 2, 1],
+  },
+  {
+    name: "fractured heptatonic B",
+    jumps: [3, 3, 1, 2, 3, 1, 2],
+  },
+  {
+    name: "fractured heptatonic C",
+    jumps: [3, 3, 1, 2, 3, 2, 1],
+  },
+  {
+    name: "fractured heptatonic D",
+    jumps: [3, 3, 2, 1, 3, 1, 2],
+  },
+]
+
+export default scales_15edo;
