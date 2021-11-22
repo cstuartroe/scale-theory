@@ -2,10 +2,7 @@ from tabulate import tabulate
 from src.ji import just_chords
 from src.scales import EDOChord
 from .utils import make_parser
-
-
-MAJOR_EDOS = [12, 17, 19, 22, 24, 31]
-
+from ..edo import MAJOR_EDOS
 
 parser = make_parser(description="List just chords in order of consonance", edo_steps=False, dissonance_function=True,
                      max_ratio=True, num_results=True, length=True)

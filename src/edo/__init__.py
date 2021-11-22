@@ -1,1 +1,1 @@
-from .edo import EDO, EDOInterval
+from .edo import EDO, EDOInterval, MAJOR_EDOS

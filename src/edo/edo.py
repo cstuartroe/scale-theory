@@ -2,6 +2,8 @@ from functools import cache
 import jxon
 from src.ji import Interval, JI
 
+MAJOR_EDOS = (5, 7, 12, 15, 17, 19, 22, 24, 31)
+
 MAJOR_MINOR_INTERVALS = ["2", "3", "6", "7"]
 PERFECT_INTERVALS = ["4", "5"]
 

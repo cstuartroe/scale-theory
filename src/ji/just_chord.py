@@ -18,9 +18,15 @@ with open("static/ji/chords.jxon", "r") as fh:
     NAMED_CHORDS = jxon.load(fh)
 
 
+with open("static/ji/intervals.jxon", "r") as fh:
+    for ivl in jxon.load(fh):
+        NAMED_CHORDS.append({"name": ivl["name"], "ratio": [ivl["denom"], ivl["num"]]})
+
+
 class JustChord:
     def __init__(self, ratio: [int]):
-        assert all(ratio[i] < ratio[i+1] for i in range(len(ratio) - 1))
+        if not all(ratio[i] < ratio[i+1] for i in range(len(ratio) - 1)):
+            raise ValueError(f"JustChord ratio must be increasing: {ratio}")
         self.ratio = tuple(ratio)
 
     def __repr__(self):
@@ -39,7 +45,17 @@ class JustChord:
         for chord_obj in NAMED_CHORDS:
             chord = JustChord(chord_obj["ratio"])
 
-            for inv in range(min(self.size(), chord.size())):
+            if chord == self:
+                return chord_obj["name"], 0
+
+        for chord_obj in NAMED_CHORDS:
+            # don't try to invert intervals
+            if len(chord_obj["ratio"]) == 2:
+                continue
+
+            chord = JustChord(chord_obj["ratio"])
+
+            for inv in range(1, min(self.size(), chord.size())):
                 if chord.invert(inv) == self:
                     return chord_obj["name"], inv
 

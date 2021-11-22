@@ -5,3 +5,4 @@ __pycache__
 images
 scale_cache
 sandbox.py
+*.png

@@ -6,6 +6,10 @@ chords: chord_array = [
     ratio: [6, 8, 9],
   },
   {
+    name: "sus2",
+    ratio: [8, 9, 12],
+  },
+  {
     name: "major",
     ratio: [4, 5, 6],
   },
