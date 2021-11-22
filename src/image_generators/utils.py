@@ -10,6 +10,9 @@ def hex_to_rgb(value):
 
 
 class Colors:
+    TRANSPARENT = (0, 0, 0, 0)
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
     LIGHT_BLUE = hex_to_rgb("#1bb9d7")
     GRASS_GREEN = hex_to_rgb("#7ed957")
     ORANGE = hex_to_rgb("#ff914d")

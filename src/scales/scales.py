@@ -184,6 +184,18 @@ class Mode(Scale):
     def interval_set(self):
         return set(self.intervals())
 
+    @cache
+    def mode_number(self):
+        for i, mode in enumerate(self.cycle().modes):
+            if mode == self:
+                return i + 1
+
+        raise RuntimeError
+
+    @cache
+    def name(self):
+        return f"{self.cycle().name()} (mode {self.mode_number()})"
+
     def cycle(self):
         return Cycle(self.jumps)
 

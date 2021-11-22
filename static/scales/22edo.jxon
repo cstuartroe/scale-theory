@@ -12,7 +12,7 @@ scales_22edo: scales = [
   {
     name: "minor bent diatonic",
     jumps: [4, 2, 3, 4, 2, 4, 3],
-  }
+  },
   {
     name: "bent hexatonic",
     jumps: [6, 3, 4, 2, 4, 3],
