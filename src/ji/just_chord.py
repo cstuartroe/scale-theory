@@ -24,6 +24,8 @@ with open("static/ji/intervals.jxon", "r") as fh:
 
 
 class JustChord:
+    NAMED_CHORDS: list["JustChord"]
+
     def __init__(self, ratio: [int]):
         if not all(ratio[i] < ratio[i+1] for i in range(len(ratio) - 1)):
             raise ValueError(f"JustChord ratio must be increasing: {ratio}")

@@ -1,5 +1,5 @@
 import time
-from typing import List
+from typing import Iterable
 # sinplecoremidi is MacOS only - TODO find a more general solution
 from simplecoremidi import send_midi
 from .midi_numbers import BASE_MIDI_NOTE
@@ -18,8 +18,8 @@ def emit_midi(midi_numbers, note_duration=500, velocity=64, channel=0):
         send_midi((128 + channel, midi_number, velocity))
 
 
-def sequence_from_jumps(jumps: List[int], starting_note: int = BASE_MIDI_NOTE):
-    seq: List[int] = [starting_note]
+def sequence_from_jumps(jumps: Iterable[int], starting_note: int = BASE_MIDI_NOTE):
+    seq: list[int] = [starting_note]
     for jump in jumps:
         seq.append(seq[-1] + jump)
     return seq
@@ -37,7 +37,7 @@ def flatten(l):
         yield l
 
 
-def notes_with_no_dead_keys(notes: List[List[int]]):
+def notes_with_no_dead_keys(notes: list[list[int]]):
     for i in range(20):
         shifted = [[n + i for n in group] for group in notes]
         if all(note not in DEAD_KEYS for note in flatten(shifted)):
@@ -50,12 +50,12 @@ def notes_with_no_dead_keys(notes: List[List[int]]):
     return notes
 
 
-def emit_midi_notes(notes: List[List[int]], **kwargs):
+def emit_midi_notes(notes: list[list[int]], **kwargs):
     for group in notes_with_no_dead_keys(notes):
         emit_midi(group, **kwargs)
 
 
-def emit_midi_sequence(seq: List[int], **kwargs):
+def emit_midi_sequence(seq: list[int], **kwargs):
     emit_midi_notes([[n] for n in seq], **kwargs)
 
 

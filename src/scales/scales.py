@@ -1,6 +1,6 @@
 import os
 import re
-from typing import List
+from typing import Iterable
 import jxon
 from functools import cache
 from src.ji import JustChord
@@ -9,7 +9,7 @@ from src.midi_utils import emit_midi_sequence, sequence_from_jumps
 
 
 class Scale:
-    def __init__(self, jumps: [int]):
+    def __init__(self, jumps: Iterable[int]):
         self.jumps = tuple(jumps)
 
     @cache
@@ -59,12 +59,12 @@ class CycleMetaclass(type):
 
 
 class Cycle(Scale, metaclass=CycleMetaclass):
-    def __init__(self, jumps):
+    def __init__(self, jumps: Iterable[int]):
         super().__init__(jumps)
 
         # these ae immediately overwritten in CycleMetaclass.__call__, they're just written here for the benefit
         # of the type checker
-        self.modes: List[Mode] = []
+        self.modes: list[Mode] = []
         self.canon_mode: Mode = None
 
     def __eq__(self, other):
