@@ -1,4 +1,4 @@
-from src.midi_utils import (
+from src.player_utils import (
     midi_number_frequency,
     midi_number_standard_frequency,
     midi_name_to_number,

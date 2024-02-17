@@ -8,7 +8,7 @@ from src.cli import (
     ListSubcycles,
     FindJustChords,
     DegreeApproximations,
-    PlayMidi,
+    PlayCycle,
     Metastats,
     FindPianoteqDiapason,
     quiz,
@@ -23,7 +23,7 @@ COMMANDS = {
     "find_subscales": ListSubcycles,
     "just_chords": FindJustChords,
     "degree_approximation": DegreeApproximations,
-    "play": PlayMidi,
+    "play": PlayCycle,
     "metastats": Metastats,
     "diapason": FindPianoteqDiapason,
 }

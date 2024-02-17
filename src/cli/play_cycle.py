@@ -15,18 +15,18 @@ parser.add_argument('-m', '--mode', default=None, type=str, metavar='n',
                          "or specify 'all' to play all modes in order")
 
 
-class PlayMidi:
+class PlayCycle:
     parser = parser
 
     @staticmethod
     def run(cycle: Cycle, note_duration, velocity, mode, channel):
         if mode is None:
-            cycle.play_midi(note_duration=note_duration, velocity=velocity, channel=channel)
+            cycle.play(note_duration=note_duration, velocity=velocity, channel=channel)
         elif mode == 'all':
             for i, m in enumerate(cycle.modes):
                 if i != 0:
                     time.sleep(1)
-                m.play_midi(note_duration=note_duration, velocity=velocity, channel=channel)
+                m.play(note_duration=note_duration, velocity=velocity, channel=channel)
         else:
             try:
                 mode_number = int(mode)
@@ -38,4 +38,4 @@ class PlayMidi:
             except ValueError:
                 raise ScaleTheoryError(f"Mode number too high (max {len(cycle.modes)})")
 
-            m.play_midi(note_duration=note_duration, velocity=velocity, channel=channel)
+            m.play(note_duration=note_duration, velocity=velocity, channel=channel)

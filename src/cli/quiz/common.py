@@ -1,5 +1,5 @@
 from random import randrange
-from src.midi_utils import emit_midi_notes, emit_midi_sequence, BASE_MIDI_NOTE, flatten
+from src.player_utils import Player, BASE_MIDI_NOTE, flatten
 from src.cli.utils import make_parser
 
 
@@ -40,9 +40,9 @@ def get_guess(prompt, notes, midi_params):
 
         guess_str = input(prompt).lower()
         if guess_str in ["again", "y", "yes"]:
-            emit_midi_notes(notes, **midi_params)
+            Player().play_simultaneous(notes, **midi_params)
         elif guess_str in ["individual", "i"]:
-            emit_midi_sequence(flatten(notes), **midi_params)
+            Player().play_sequential(flatten(notes), **midi_params)
         elif guess_str in ["quit", "q"]:
             raise KeyboardInterrupt
         else:
@@ -57,7 +57,7 @@ def quiz_loop(generator_function):
         tried += 1
         answer, notes, midi_params = generator_function()
 
-        emit_midi_notes(notes, **midi_params)
+        Player.play_simultaneous(notes, **midi_params)
 
         guess = get_guess("Guess: ", notes, midi_params)
 

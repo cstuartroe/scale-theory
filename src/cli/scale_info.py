@@ -7,7 +7,7 @@ from src.scale_properties.cycle_stats import (
     count_extensions,
     proper,
 )
-# from src.midi_utils import midi_to_12edo_name, get_midi_numbers
+# from src.player_utils import midi_to_12edo_name, get_midi_numbers
 from .utils import make_parser
 
 TETRACHORDS = {

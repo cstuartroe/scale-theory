@@ -5,6 +5,6 @@ from .find_scales import ListCycles
 from .find_subcycles import ListSubcycles
 from .find_just_chords import FindJustChords
 from .degree_approximations import DegreeApproximations
-from .play_midi import PlayMidi
+from .play_cycle import PlayCycle
 from .metastats import Metastats
 from .find_pianoteq_diapason import FindPianoteqDiapason

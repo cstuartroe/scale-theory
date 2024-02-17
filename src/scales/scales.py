@@ -5,7 +5,7 @@ import jxon
 from functools import cache
 from src.ji import JustChord
 from src.edo import EDO, EDOInterval
-from src.midi_utils import emit_midi_sequence, sequence_from_jumps
+from src.player_utils import Player, sequence_from_jumps
 
 
 class Scale:
@@ -149,9 +149,10 @@ class Cycle(Scale, metaclass=CycleMetaclass):
     def named_cycles(edo_steps: int):
         return [Cycle(cycle["jumps"]) for cycle in NAMED_CYCLES.get(edo_steps, [])]
 
-    def play_midi(self, note_duration, velocity, channel):
-        emit_midi_sequence(
+    def play(self, note_duration, velocity, channel):
+        Player.play_sequential(
             sequence_from_jumps(self.jumps + self.jumps),
+            edo=self.edo().steps,
             note_duration=note_duration,
             velocity=velocity,
             channel=channel,
@@ -208,9 +209,10 @@ class Mode(Scale):
     def __hash__(self):
         return hash(self.jumps)
 
-    def play_midi(self, note_duration, velocity, channel):
-        emit_midi_sequence(
+    def play(self, note_duration, velocity, channel):
+        Player.play_sequential(
             sequence_from_jumps(self.jumps),
+            edo=self.edo().steps,
             note_duration=note_duration,
             velocity=velocity,
             channel=channel,

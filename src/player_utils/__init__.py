@@ -6,4 +6,4 @@ from .midi_numbers import (
     BASE_MIDI_NOTE,
     flatten,
 )
-from .emit_midi import sequence_from_jumps, emit_midi_sequence, emit_midi_notes
+from .play import sequence_from_jumps, Player
