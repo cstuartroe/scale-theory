@@ -69,6 +69,13 @@ PRIORITY_SEQUENCES = {
         count_p5s,
     ),
 
+    "total_chord_priorities": (
+        proper,
+        lambda cycle: count_distinct_chord_roots(cycle, ["septimal m3", "m3", "maj3"]),
+        lambda cycle: count_total_chords(cycle, ["septimal m3", "m3", "maj3"]),
+        count_p5s,
+    ),
+
     "n2_not_n3": (
         lambda cycle: -count_by_name(cycle, "n3"),
         count_p5s,
