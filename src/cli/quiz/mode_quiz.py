@@ -17,7 +17,7 @@ class ModeQuiz:
     pass_edo_steps = True
 
     @staticmethod
-    def run(edo_steps, groups, cycle: Cycle, **midi_params):
+    def run(edo_steps, groups, cycle: Cycle, fixed_root: bool, **midi_params):
         def genf():
             mode_num = randrange(cycle.size())
             mode = cycle.modes[mode_num]
@@ -35,11 +35,11 @@ class ModeQuiz:
                         ivls.append(ivl)
                         available_ivls.remove(ivl)
 
-            bass_note = get_bass_note(edo_steps)
+            bass_note = get_bass_note(fixed_root, edo_steps)
             notes = [(bass_note + ivl.steps,) for ivl in ivls]
 
             answer = str(mode_num + 1)
 
-            return answer, notes, midi_params
+            return answer, notes, {"edo": edo_steps, **midi_params}
 
         quiz_loop(genf)

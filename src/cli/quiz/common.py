@@ -7,7 +7,7 @@ def get_bass_note(fixed_root, edo_steps):
     if fixed_root:
         return BASE_MIDI_NOTE
 
-    return randrange(52, 52 + edo_steps)
+    return randrange(69 - edo_steps, 69)
 
 
 def quiz_parser(verb, fixed_root=True, **kwargs):
@@ -40,7 +40,8 @@ def get_guess(prompt, notes, midi_params):
 
         guess_str = input(prompt).lower()
         if guess_str in ["again", "y", "yes"]:
-            Player().play_simultaneous(notes, **midi_params)
+            for note_group in notes:
+                Player().play_simultaneous(note_group, **midi_params)
         elif guess_str in ["individual", "i"]:
             Player().play_sequential(flatten(notes), **midi_params)
         elif guess_str in ["quit", "q"]:
@@ -57,7 +58,8 @@ def quiz_loop(generator_function):
         tried += 1
         answer, notes, midi_params = generator_function()
 
-        Player.play_simultaneous(notes, **midi_params)
+        for note_group in notes:
+            Player.play_simultaneous(note_group, **midi_params)
 
         guess = get_guess("Guess: ", notes, midi_params)
 

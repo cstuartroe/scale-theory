@@ -2,7 +2,7 @@ import platform
 import time
 from typing import Iterable
 from .midi_numbers import BASE_MIDI_NOTE
-from .pyaudio_utils import play_sine_wave
+# from .pyaudio_utils import play_sine_wave
 
 USE_SCM = (platform.system() == 'Darwin')  # macOS
 A4_MIDI_NUMBER = 69  # Nice
@@ -33,7 +33,7 @@ class Player:
             for mn in midi_numbers
         ]
 
-        play_sine_wave(frequencies, duration=note_duration, volume=volume)
+        # play_sine_wave(frequencies, duration=note_duration, volume=volume)
 
     @classmethod
     def emit_midi(cls, midi_numbers: Iterable[int], note_duration: int = 500, velocity: int = 64, channel: int = 0):

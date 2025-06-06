@@ -121,7 +121,8 @@ class EDO:
             if self.steps != 15:
                 assert named_intervals["maj2"] - m2 == aug
                 assert named_intervals["maj7"] - named_intervals["m7"] == aug
-            assert named_intervals["p4"] - named_intervals["maj3"] == m2
+            if self.steps != 16:
+                assert named_intervals["p4"] - named_intervals["maj3"] == m2
         except AssertionError:
             print(named_intervals)
             raise ValueError
@@ -139,12 +140,16 @@ class EDO:
         for ivl in MAJOR_MINOR_INTERVALS:
             m_steps = named_intervals["m" + ivl]
             maj_steps = named_intervals["maj" + ivl]
-            if not any_core_names(out[m_steps - 1]):
-                out[m_steps - 1].append("sub" + ivl)
-            if not any_core_names(out[maj_steps + 1]):
-                out[maj_steps + 1].append("sup" + ivl)
+            try:
+                if not any_core_names(out[m_steps - 1]):
+                    out[m_steps - 1].append("sub" + ivl)
+                if not any_core_names(out[maj_steps + 1]):
+                    out[maj_steps + 1].append("sup" + ivl)
+            except IndexError:
+                pass
             if aug == 2:
-                out[m_steps + 1].append("n" + ivl)
+                if not any_core_names(out[m_steps + 1]):
+                    out[m_steps + 1].append("n" + ivl)
 
         for ivl in PERFECT_INTERVALS:
             p_steps = named_intervals["p" + ivl]

@@ -1,7 +1,7 @@
 from random import choice, randrange
+from src.edo import EDOInterval
 from src.scales import EDOChord
 from .common import quiz_parser, quiz_loop, get_bass_note
-from ...edo import EDOInterval
 
 QUIZZABLE_CHORD_SHAPES = [
     "major",
@@ -69,6 +69,6 @@ class ChordsQuiz:
             for chord, tonic_jump in zip(chords[1:], tonic_jumps[1:]):
                 answer += f", {EDOInterval(tonic_jump, edo_steps).name()} {short_name(chord)}"
 
-            return answer, notes, midi_params
+            return answer, notes, {"edo": edo_steps, **midi_params}
 
         quiz_loop(genf)

@@ -1,5 +1,6 @@
 from typing import List
 from src.ji import JI
+from src.edo import EDOInterval
 from src.scales import Cycle
 
 
@@ -72,6 +73,34 @@ def count_present_consonances(cycle: Cycle):
 
 def count_dissonances(cycle: Cycle):
     return -sum([cycle.interval_counts().get(d, 0) for d in cycle.edo().dissonances])
+
+
+def count_intervals(cycle: Cycle, intervals: list[int]):
+    ivs = [EDOInterval(i, cycle.edo_steps()) for i in intervals]
+    return -sum([cycle.interval_counts().get(i, 0) for i in ivs])
+
+
+def largest_jump(cycle: Cycle):
+    return max(cycle.jumps)
+
+
+def wonkiness(cycle: Cycle):
+    average_jump = cycle.edo_steps()/len(cycle.jumps)
+    out = 0
+    for jump in cycle.jumps:
+        out += (jump - average_jump)**2
+    return round(out, 2)
+
+
+HATED_INTERVALS: dict[int, list[int]] = {
+    16: [6],
+    22: [1, 8],
+    31: [1, 9, 11, 12],
+}
+
+
+def intervals_i_hate(cycle: Cycle):
+    return count_intervals(cycle, HATED_INTERVALS.get(cycle.edo_steps(), []))
 
 
 class Proper:

@@ -83,4 +83,14 @@ PRIORITY_SEQUENCES = {
         proper,
         lambda cycle: count_total_chords(cycle, ["septimal m3", "m3", "maj3"]),
     ),
+
+    "hatred_avoidance": (
+        lambda cycle: intervals_i_hate(cycle),
+        lambda cycle: -wonkiness(cycle),
+        proper,
+        interval_diversity,
+        count_p5s,
+        lambda cycle: count_total_chords(cycle, ["maj3"]),
+        lambda cycle: count_total_chords(cycle, ["m3"]),
+    ),
 }

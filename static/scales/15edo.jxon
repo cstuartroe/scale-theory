@@ -33,6 +33,10 @@ scales_15edo: scales = [
     name: "fractured heptatonic D",
     jumps: [3, 3, 2, 1, 3, 1, 2],
   },
+  {
+    name: "ultraneut",
+    jumps: [2, 2, 2, 3, 2, 2, 2],
+  }
 ]
 
 export default scales_15edo;

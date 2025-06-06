@@ -53,6 +53,6 @@ class MelodyQuiz:
 
             answer = ",".join(ivl.name() for ivl in ivls)
 
-            return answer, notes, midi_params
+            return answer, notes, {"edo": edo_steps, **midi_params}
 
         quiz_loop(genf)
