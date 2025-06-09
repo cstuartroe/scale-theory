@@ -1,0 +1,45 @@
+$light_purple: #ccaaff;
+$light_green: #aaffaa;
+$light_red: #ffaaaa;
+$light_yellow: #ffffdd;
+$light_blue: #aaccff;
+$light_gray: #dddddd;
+$dark_gray: #777777;
+
+h1, h2, h3 {
+  text-align: center;
+}
+
+.xenbutton {
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  background-color: white;
+
+  &.xenactive {
+    background-color: $light_purple;
+  }
+
+  &.xenwrong {
+    background-color: $light_red;
+  }
+
+  &.xencorrect {
+    background-color: $light_green;
+  }
+
+  &:hover {
+    background-color: $light_yellow;
+  }
+}
+
+.xennoclick {
+  cursor: default;
+  background-color: $light_gray;
+
+  &:hover {
+    border-color: black;
+    background-color: $light_gray;
+  }
+}

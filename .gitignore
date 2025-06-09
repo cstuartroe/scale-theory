@@ -6,3 +6,5 @@ images
 scale_cache
 sandbox.py
 *.png
+node_modules
+.DS_Store
