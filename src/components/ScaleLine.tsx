@@ -16,9 +16,14 @@ export default function ScaleLine({chord, diminished}: Props) {
   const allIntervals = [0, ...chord.chord.intervals];
   const bassNote = allIntervals[chord.inversion];
   const {edoSteps} = chord.chord;
-  const stepsWithDegreeNumbers: [number, number][] = allIntervals.map(steps => (
-    [(steps + edoSteps - bassNote) % edoSteps, degreeNumber(EDOCents(edoSteps, steps), diminished || false)]
+  let stepsWithDegreeNumbers: [number, number][] = allIntervals.map((steps, i) => (
+    [steps - bassNote + (i < chord.inversion ? edoSteps : 0), degreeNumber(EDOCents(edoSteps, steps), diminished || false)]
   ));
+
+  if (stepsWithDegreeNumbers[0][0] < 0) {
+    const shift = -stepsWithDegreeNumbers[0][0];
+    stepsWithDegreeNumbers = stepsWithDegreeNumbers.map(([steps, degreeNumber]) => [steps + shift, degreeNumber]);
+  }
 
   const numOctaves = Math.ceil(Math.max(...stepsWithDegreeNumbers.map(p => p[0])) / edoSteps);
 
@@ -30,7 +35,7 @@ export default function ScaleLine({chord, diminished}: Props) {
         const degreeNumber = stepAndDegreeNumber === undefined ? "" : stepAndDegreeNumber[1];
 
         return (
-          <div style={{
+          <div key={i} style={{
             flex: 1,
             backgroundColor: i === 0 || used ? useFill : skipFill,
             border: "1px solid black",

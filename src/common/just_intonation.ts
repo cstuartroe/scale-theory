@@ -221,6 +221,10 @@ const allJustChords: JustChord[] = [
     name: "neutral",
     harmonics: [18, 22, 27],
   },
+  {
+    name: "add9",
+    harmonics: [4, 5, 6, 9],
+  },
 ];
 
 export function degreeNumber(cents: number, diminished: boolean): number {
