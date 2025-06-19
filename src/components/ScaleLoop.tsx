@@ -4,6 +4,7 @@ import {range} from "../common/utils";
 import {skipFill, useFill} from "../common/colors";
 import {EDOChord} from "../common/edo";
 import {AudioParams, getAudio} from "../common/audioCache";
+import {PlayType, scaleAudioParams} from "../common/play";
 
 
 const imageSize = 120;
@@ -13,6 +14,8 @@ const innerRadius = 40;
 
 function ScaleLoopSVG({chord}: { chord: EDOChord }) {
   const sliceRadians = 2 * Math.PI / chord.edoSteps;
+
+  const moddedIntervals = chord.intervals.map(ivl => ivl % chord.edoSteps);
 
   return (
     <svg width={imageSize} height={imageSize} style={{margin: "auto"}}>
@@ -30,7 +33,7 @@ function ScaleLoopSVG({chord}: { chord: EDOChord }) {
         `
 
         return <path key={i} d={d} stroke="black" strokeWidth="1"
-                     fill={[0, ...chord.intervals].includes(i) ? useFill : skipFill}/>
+                     fill={[0, ...moddedIntervals].includes(i) ? useFill : skipFill}/>
       })}
     </svg>
   );
@@ -38,46 +41,43 @@ function ScaleLoopSVG({chord}: { chord: EDOChord }) {
 
 type Props = {
   chord: EDOChord,
-  playable: "no_play" | "arpeg_only" | "play_both",
+  playTypes: PlayType[],
   tonicMidiNumber: number,
 }
 
 const timbre = "piano";
 
-export default function ScaleLoop({chord, playable, tonicMidiNumber}: Props) {
+const playButtonText: {[key in PlayType]: string} = {
+  chord: "play",
+  arpeggio: "arpeg",
+  scale: "play",
+  "double scale": "2x",
+}
+
+export default function ScaleLoop({chord, playTypes, tonicMidiNumber}: Props) {
   const chordMidiNumbers = [0, ...chord.intervals].map(n => n + tonicMidiNumber);
   const edoSteps = chord.edoSteps;
-
-  const chordAudioParams: AudioParams = {timbre, edoSteps, duration: 2000, notes: [chordMidiNumbers]};
-  const arpeggioAudioParams: AudioParams = {timbre, edoSteps, duration: 750, notes: chordMidiNumbers.map(n => [n])};
 
   const buttonStyle = {width: "50px", margin: "auto"} as const;
 
   return (
     <div style={{width: "100%", display: "flex", position: "relative"}}>
       <ScaleLoopSVG chord={chord}/>
-      {playable !== "no_play" && (
-        <div style={{
-          position: "absolute",
-          width: "100%",
-          paddingTop: `${playable === "play_both" ? 35 : 45}px`,
-          display: "flex",
-          flexDirection: "column"
-        }}>
-          {playable == "play_both" && <>
-            <div className="xenbutton" style={buttonStyle} onClick={() => {
-              getAudio(chordAudioParams).play()
-            }}>
-              play
-            </div>
-          </>}
-          <div className="xenbutton" style={buttonStyle} onClick={() => {
-            getAudio(arpeggioAudioParams).play()
+      <div style={{
+        position: "absolute",
+        width: "100%",
+        paddingTop: `${55 - 10*playTypes.length}px`,
+        display: "flex",
+        flexDirection: "column"
+      }}>
+        {playTypes.map(pt => (
+          <div key={pt} className="xenbutton" style={buttonStyle} onClick={() => {
+            getAudio({timbre, ...scaleAudioParams(chord, pt, tonicMidiNumber)}).play()
           }}>
-            arpeg
+            {playButtonText[pt]}
           </div>
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 }

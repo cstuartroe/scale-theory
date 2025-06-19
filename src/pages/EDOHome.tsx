@@ -1,6 +1,6 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 
-import {EDOStepsContext} from "../common/contexts";
+import {edoStepsParam} from "../common/query_params";
 import {allJustChords, harmonicsInOrder} from "../common/just_intonation";
 import EDOIntervalsSVG from "../components/EDOIntervalsSVG";
 import MaxHarmonicSlider from "../components/MaxHarmonicSlider";
@@ -9,7 +9,7 @@ import ScaleLoop from "../components/ScaleLoop";
 import {midi440} from "../common/midi";
 
 const EDOHome = (_: {}) => {
-  const edoSteps = useContext(EDOStepsContext);
+  const edoSteps = edoStepsParam.get();
   const [maxHarmonicIndex, setMaxHarmonicIndex] = useState(5);
 
   const chordNames: [EDOChord, string[]][] = [];
@@ -50,7 +50,7 @@ const EDOHome = (_: {}) => {
           {chordNames.map(([chord, names]) => {
             return (
               <div key={names[0]} className="col-6 col-md-3" style={{paddingBottom: "10px"}}>
-                <ScaleLoop chord={chord} playable="play_both" tonicMidiNumber={midi440}/>
+                <ScaleLoop chord={chord} playTypes={["chord", "arpeggio"]} tonicMidiNumber={midi440}/>
                 <p style={{textAlign: "center"}}>{names.join(", ")}</p>
               </div>
             );

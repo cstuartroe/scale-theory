@@ -22,3 +22,18 @@ export function randrange(n: number) {
 export function randomElement<T>(l: T[]): T {
   return l[randrange(l.length)];
 }
+
+export function choose(m: number, n: number): number {
+  let out = 1;
+
+  const x = Math.max(n, m-n);
+  const y = Math.min(n, m-n);
+  for (let i = x + 1; i <= m; i++) {
+    out *= i;
+  }
+  for (let i = 2; i <= y; i++) {
+    out /= i;
+  }
+
+  return out;
+}

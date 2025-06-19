@@ -2,22 +2,20 @@ import React from "react";
 
 import {range} from "../common/utils";
 import {useFill, skipFill} from "../common/colors";
-import {degreeNumber} from "../common/just_intonation";
-import {EDOChordWithInversion, EDOCents} from "../common/edo";
+import {EDOChordWithInversion, EDOCents, abbreviate} from "../common/edo";
 
 const height = 25;
 
 type Props = {
   chord: EDOChordWithInversion,
-  diminished?: boolean,
 }
 
-export default function ScaleLine({chord, diminished}: Props) {
+export default function ScaleLine({chord}: Props) {
   const allIntervals = [0, ...chord.chord.intervals];
   const bassNote = allIntervals[chord.inversion];
   const {edoSteps} = chord.chord;
-  let stepsWithDegreeNumbers: [number, number][] = allIntervals.map((steps, i) => (
-    [steps - bassNote + (i < chord.inversion ? edoSteps : 0), degreeNumber(EDOCents(edoSteps, steps), diminished || false)]
+  let stepsWithDegreeNumbers: [number, string][] = allIntervals.map((steps, i) => (
+    [steps - bassNote + (i < chord.inversion ? edoSteps : 0), abbreviate(edoSteps, steps)]
   ));
 
   if (stepsWithDegreeNumbers[0][0] < 0) {

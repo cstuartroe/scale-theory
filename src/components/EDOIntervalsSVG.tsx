@@ -1,14 +1,16 @@
 import {range, round} from "../common/utils";
 import React from "react";
 import {allJustIntervals, greatestHarmonic, jiCents, JustInterval} from "../common/just_intonation";
+import {abbreviate} from "../common/edo";
 
 const width = 550;
-const lineStart = 70;
+const lineStart = 95;
 const lineEnd = 250;
 const lineWidth = (lineEnd - lineStart) / 2 + 10;
 const height = 1200;
 const padding = 30;
 const textOffsetX = 5;
+const degreeWidth = 30;
 const textOffsetY = 5;
 const chartFont = "regular 10px sans-serif";
 
@@ -40,6 +42,9 @@ export default function EDOIntervalsSVG({edoSteps, maxHarmonic}: Props) {
         return <React.Fragment key={i}>
           <line x1={lineStart} x2={lineStart + lineWidth} y1={y} y2={y} stroke="black" strokeWidth="2"/>
           <text x={textOffsetX} y={y + textOffsetY} style={{fill: "black", font: chartFont}}>
+            {abbreviate(edoSteps, i)}
+          </text>
+          <text x={textOffsetX + degreeWidth} y={y + textOffsetY} style={{fill: "black", font: chartFont}}>
             {round(i / edoSteps * 1200, 1)}¢
           </text>
         </React.Fragment>

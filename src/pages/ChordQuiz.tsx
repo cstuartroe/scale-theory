@@ -1,9 +1,9 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import classNames from "classnames";
 
-import {EDOStepsContext} from "../common/contexts";
+import {edoStepsParam} from "../common/query_params";
 import {randomElement, randrange, range, toggleInclusion} from "../common/utils";
-import {allUniqueEDOChords, NamedEDOChord} from "../common/edo";
+import {allUniqueEDOChords} from "../common/edo";
 import {getAudio} from "../common/audioCache";
 import {midi440, midiNumbersForChord} from "../common/midi";
 import ScaleLine from "../components/ScaleLine";
@@ -36,7 +36,7 @@ function getNotes(a: Answer, edoSteps: number, tonicMidi: number) {
 const defaultChords = ["major", "minor"];
 
 export default function ChordQuiz() {
-  const edoSteps = useContext(EDOStepsContext);
+  const edoSteps = edoStepsParam.get();
   const edoChords = allUniqueEDOChords(edoSteps);
 
   const [shapesToQuiz, setShapesToQuiz] = useState<string[]>(defaultChords);
@@ -295,7 +295,6 @@ export default function ChordQuiz() {
                     chord: chordShape,
                     inversion: inversionToDisplay(chordShape.name, chordShape.intervals.length + 1)
                   }}
-                  diminished={chordShape.name.includes("diminish")}
                 />
 
                 {(inversionAllowance === "Quiz on Inversions" || (inversionAllowance === "Allow Inversion" && userAnswer !== undefined)) ? (

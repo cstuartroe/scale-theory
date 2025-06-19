@@ -194,15 +194,15 @@ const allJustChords: JustChord[] = [
     harmonics: [10, 12, 15],
   },
   {
-    name: "major seven",
+    name: "maj7",
     harmonics: [8, 10, 12, 15],
   },
   {
-    name: "minor seven",
+    name: "min7",
     harmonics: [10, 12, 15, 18],
   },
   {
-    name: "dominant seven",
+    name: "dom7",
     harmonics: [4, 5, 6, 7],
   },
   {
@@ -222,43 +222,17 @@ const allJustChords: JustChord[] = [
     harmonics: [18, 22, 27],
   },
   {
+    name: "dom9",
+    harmonics: [4, 5, 6, 7, 9],
+  },
+  {
+    name: "maj9",
+    harmonics: [8, 10, 12, 15, 18],
+  },
+  {
     name: "add9",
     harmonics: [4, 5, 6, 9],
   },
 ];
-
-export function degreeNumber(cents: number, diminished: boolean): number {
-  if (cents === 0) {
-    return 1;
-  } else if (cents <= 250) {
-    return 2;
-  } else if (cents <= 450) {
-    return 3;
-  } else if (cents < 600) {
-    return 4;
-  } else if (cents === 600) {
-    return diminished ? 5 : 4;
-  } else if (cents < 750) {
-    return 5;
-  } else if (cents < 950) {
-    return 6;
-  } else if (cents < 1200) {
-    return 7;
-  } else if (cents === 1200) {
-    return 8;
-  } else if (cents <= 1450) {
-    return 9;
-  } else if (cents <= 1650) {
-    return 10;
-  } else if (cents <= 1800) {
-    return 11;
-  } else if (cents < 1950) {
-    return 12;
-  } else if (cents < 2150) {
-    return 13;
-  } else {
-    return -1;
-  }
-}
 
 export {harmonicsInOrder, allJustIntervals, allJustChords};
